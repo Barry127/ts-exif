@@ -1,0 +1,61 @@
+import {
+  RawExifExifData,
+  RawExifGPSData,
+  RawExifImageData,
+  RawExifInteropData,
+  RawExifThumbnailData
+} from './types';
+
+export const EXIF_TAGS: Record<
+  number,
+  | keyof RawExifImageData
+  | keyof RawExifThumbnailData
+  | keyof RawExifExifData
+  | keyof RawExifInteropData
+> = {
+  0x0001: 'InteropIndex',
+  0x0002: 'InteropVersion',
+  0x0103: 'CompressionValue',
+  0x010f: 'Make',
+  0x0110: 'Model',
+  0x0112: 'Orientation',
+  0x011a: 'XResolution',
+  0x011b: 'YResolution',
+  0x0128: 'ResolutionUnit',
+  0x0132: 'ModifyDate',
+  0x0201: 'ThumbnailOffset',
+  0x0202: 'ThumbnailLength',
+  0x0213: 'YCbCrPositioning',
+  0x1001: 'RelatedImageWidth',
+  0x1002: 'RelatedImageHeight',
+  0x829a: 'ExposureTime',
+  0x829d: 'FNumber',
+  0x8769: 'ExifOffset',
+  0x9000: 'ExifVersion',
+  0x9003: 'DateTimeOriginal',
+  0x9004: 'DateTimeDigitized',
+  0x9101: 'ComponentsConfiguration',
+  0x9102: 'CompressedBitsPerPixel',
+  0x9201: 'ShutterSpeedValue',
+  0x9202: 'ApertureValue',
+  0x9204: 'ExposureBias',
+  0x9205: 'MaxApertureValue',
+  0x9206: 'SubjectDistance',
+  0x9207: 'MeteringMode',
+  0x9209: 'Flash',
+  0x920a: 'FocalLength',
+  0x927c: 'MakerNote',
+  0x9286: 'UserComment',
+  0xa000: 'FlashpixVersion',
+  0xa001: 'ColorSpace',
+  0xa002: 'PixelXDimension',
+  0xa003: 'PixelYDimension',
+  0xa005: 'InteropOffset',
+  0xa20e: 'FocalPlaneXResolution',
+  0xa20f: 'FocalPlaneYResolution',
+  0xa210: 'FocalPlaneResolutionUnit',
+  0xa217: 'SensingMethod',
+  0xa300: 'FileSource'
+};
+
+export const EXIF_GPS_TAGS: Record<number, keyof RawExifGPSData> = {};

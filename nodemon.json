@@ -1,0 +1,9 @@
+{
+  "ignore": ["**/*.spec.ts", "node_modules"],
+  "watch": ["."],
+  "events": {
+    "start": "clear"
+  },
+  "exec": "ts-node dev.ts",
+  "ext": "ts"
+}
