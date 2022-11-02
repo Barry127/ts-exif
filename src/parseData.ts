@@ -12,6 +12,7 @@ import {
 } from './types';
 import { apertureToFNumber } from './helpers/math';
 import { packageNumber, parseDate, parseString } from './helpers/parse';
+import { isArray } from './helpers/assert';
 
 export function parseExifData(exif: RawExifData): ExifData {
   const result: ExifData = {
@@ -28,6 +29,10 @@ export function parseExifData(exif: RawExifData): ExifData {
 function parseImage(rawImage: RawExifImageData): ExifImageData {
   return Object.keys(rawImage).reduce<ExifImageData>((image, key) => {
     switch (key as keyof RawExifImageData) {
+      case 'Copyright':
+        image.Copyright = parseString(rawImage.Copyright!);
+        break;
+
       case 'ExifOffset':
         image.ExifOffset = packageNumber(rawImage.ExifOffset!);
         break;
@@ -128,6 +133,10 @@ function parseImage(rawImage: RawExifImageData): ExifImageData {
               value: 'Unknown'
             };
         }
+        break;
+
+      case 'Software':
+        image.Software = parseString(rawImage.Software!);
         break;
 
       case 'XResolution':
@@ -480,6 +489,64 @@ function parseThumbnail(rawThumbnail: RawExifThumbnailData): ExifThumbnailData {
           }
           break;
 
+        case 'Orientation':
+          switch (rawThumbnail.Orientation) {
+            case 1:
+              thumbnail.Orientation = {
+                original: rawThumbnail.Orientation!,
+                value: 'Horizontal (normal)'
+              };
+              break;
+            case 2:
+              thumbnail.Orientation = {
+                original: rawThumbnail.Orientation!,
+                value: 'Mirror horizontal'
+              };
+              break;
+            case 3:
+              thumbnail.Orientation = {
+                original: rawThumbnail.Orientation!,
+                value: 'Rotate 180'
+              };
+              break;
+            case 4:
+              thumbnail.Orientation = {
+                original: rawThumbnail.Orientation!,
+                value: 'Mirror vertical'
+              };
+              break;
+            case 5:
+              thumbnail.Orientation = {
+                original: rawThumbnail.Orientation!,
+                value: 'Mirror horizontal and rotate 270 CW'
+              };
+              break;
+            case 6:
+              thumbnail.Orientation = {
+                original: rawThumbnail.Orientation!,
+                value: 'Rotate 90 CW'
+              };
+              break;
+            case 7:
+              thumbnail.Orientation = {
+                original: rawThumbnail.Orientation!,
+                value: 'Mirror horizontal and rotate 90 CW'
+              };
+              break;
+            case 8:
+              thumbnail.Orientation = {
+                original: rawThumbnail.Orientation!,
+                value: 'Rotate 270 CW'
+              };
+              break;
+            default:
+              thumbnail.Orientation = {
+                original: rawThumbnail.Orientation!,
+                value: 'Unknown'
+              };
+          }
+          break;
+
         case 'ResolutionUnit':
           switch (rawThumbnail.ResolutionUnit) {
             case 1:
@@ -528,6 +595,29 @@ function parseThumbnail(rawThumbnail: RawExifThumbnailData): ExifThumbnailData {
           thumbnail.YResolution = packageNumber(rawThumbnail.YResolution!);
           break;
 
+        case 'YCbCrPositioning':
+          switch (rawThumbnail.YCbCrPositioning) {
+            case 1:
+              thumbnail.YCbCrPositioning = {
+                original: rawThumbnail.YCbCrPositioning,
+                value: 'Centered'
+              };
+              break;
+            case 2:
+              thumbnail.YCbCrPositioning = {
+                original: rawThumbnail.YCbCrPositioning,
+                value: 'Co-sited'
+              };
+              break;
+
+            default:
+              thumbnail.YCbCrPositioning = {
+                original: rawThumbnail.YCbCrPositioning!,
+                value: 'Unknown'
+              };
+          }
+          break;
+
         default:
           //@ts-ignore
           thumbnail[key] = rawThumbnail[key];
@@ -547,6 +637,10 @@ function parseExif(rawExif: RawExifExifData): ExifExifData {
           original: rawExif.ApertureValue!,
           value: `f/${apertureToFNumber(rawExif.ApertureValue!)}`
         };
+        break;
+
+      case 'BrightnessValue':
+        exif.BrightnessValue = packageNumber(rawExif.BrightnessValue!);
         break;
 
       case 'ColorSpace':
@@ -624,6 +718,76 @@ function parseExif(rawExif: RawExifExifData): ExifExifData {
 
       case 'ExposureBias':
         exif.ExposureBias = packageNumber(rawExif.ExposureBias!);
+        break;
+
+      case 'ExposureProgram':
+        switch (rawExif.ExposureProgram) {
+          case 0:
+            exif.ExposureProgram = {
+              original: rawExif.ExposureProgram,
+              value: 'Not Defined'
+            };
+            break;
+          case 1:
+            exif.ExposureProgram = {
+              original: rawExif.ExposureProgram,
+              value: 'Manual'
+            };
+            break;
+          case 2:
+            exif.ExposureProgram = {
+              original: rawExif.ExposureProgram,
+              value: 'Program AE'
+            };
+            break;
+          case 3:
+            exif.ExposureProgram = {
+              original: rawExif.ExposureProgram,
+              value: 'Aperture-priority AE'
+            };
+            break;
+          case 4:
+            exif.ExposureProgram = {
+              original: rawExif.ExposureProgram,
+              value: 'Shutter speed priority AE'
+            };
+            break;
+          case 5:
+            exif.ExposureProgram = {
+              original: rawExif.ExposureProgram,
+              value: 'Creative (Slow speed)'
+            };
+            break;
+          case 6:
+            exif.ExposureProgram = {
+              original: rawExif.ExposureProgram,
+              value: 'Action (High speed)'
+            };
+            break;
+          case 7:
+            exif.ExposureProgram = {
+              original: rawExif.ExposureProgram,
+              value: 'Portrait'
+            };
+            break;
+          case 8:
+            exif.ExposureProgram = {
+              original: rawExif.ExposureProgram,
+              value: 'Landscape'
+            };
+            break;
+          case 9:
+            exif.ExposureProgram = {
+              original: rawExif.ExposureProgram,
+              value: 'Bulb'
+            };
+            break;
+          default:
+            exif.ExposureProgram = {
+              original: rawExif.ExposureProgram!,
+              value: 'Unknown'
+            };
+        }
         break;
 
       case 'ExposureTime':
@@ -895,6 +1059,24 @@ function parseExif(rawExif: RawExifExifData): ExifExifData {
         );
         break;
 
+      case 'ISOSpeedRatings':
+        if (typeof rawExif.ISOSpeedRatings === 'number') {
+          exif.ISOSpeedRatings = {
+            original: rawExif.ISOSpeedRatings,
+            value: `${rawExif.ISOSpeedRatings!}`
+          };
+          break;
+        }
+        if (isArray(rawExif.ISOSpeedRatings)) {
+          exif.ISOSpeedRatings = {
+            original: rawExif.ISOSpeedRatings,
+            value: rawExif.ISOSpeedRatings.join(', ')
+          };
+          break;
+        }
+
+        break;
+
       case 'InteropOffset':
         exif.InteropOffset = packageNumber(rawExif.InteropOffset!);
         break;
@@ -975,6 +1157,22 @@ function parseExif(rawExif: RawExifExifData): ExifExifData {
 
       case 'PixelYDimension':
         exif.PixelYDimension = packageNumber(rawExif.PixelYDimension!);
+        break;
+
+      case 'SceneType':
+        switch (rawExif.SceneType?.[0]) {
+          case 1:
+            exif.SceneType = {
+              original: rawExif.SceneType,
+              value: 'Directly photographed'
+            };
+            break;
+          default:
+            exif.SceneType = {
+              original: rawExif.SceneType!,
+              value: 'Unknown'
+            };
+        }
         break;
 
       case 'SensingMethod':

@@ -1,4 +1,5 @@
 import { MakerNoteCanon, RawMakerNoteCanon } from './makerNote/canon';
+import { MakerNoteFujiFilm, RawMakerNoteFujiFilm } from './makerNote/fujiFilm';
 
 export interface ExifOptions {
   // Filter invalid tags and invalid value types. Default value true
@@ -26,23 +27,29 @@ export interface RawExifImageData {
   XResolution?: number;
   YResolution?: number;
   ResolutionUnit?: 1 | 2 | 3;
+  Software?: string;
   ModifyDate?: string;
   YCbCrPositioning?: 1 | 2;
+  Copyright?: string;
   ExifOffset?: number;
 }
 
 export interface RawExifThumbnailData {
   CompressionValue?: RawCompressionValue;
+  Orientation?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
   XResolution?: number;
   YResolution?: number;
   ResolutionUnit?: 1 | 2 | 3;
   ThumbnailOffset?: number;
   ThumbnailLength?: number;
+  YCbCrPositioning?: 1 | 2;
 }
 
 export interface RawExifExifData {
   ExposureTime?: number;
   FNumber?: number;
+  ExposureProgram?: number;
+  ISOSpeedRatings?: number | number[];
   ExifVersion?: Buffer;
   DateTimeOriginal?: string;
   DateTimeDigitized?: string;
@@ -50,6 +57,7 @@ export interface RawExifExifData {
   CompressedBitsPerPixel?: number;
   ShutterSpeedValue?: number;
   ApertureValue?: number;
+  BrightnessValue?: number;
   ExposureBias?: number;
   MaxApertureValue?: number;
   SubjectDistance?: number;
@@ -68,6 +76,7 @@ export interface RawExifExifData {
   FocalPlaneResolutionUnit?: 1 | 2 | 3 | 4 | 5;
   SensingMethod?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
   FileSource?: Buffer;
+  SceneType?: Buffer;
 }
 
 export interface RawExifGPSData {
@@ -95,23 +104,29 @@ export interface ExifImageData {
   XResolution?: ExifValue<number, number>;
   YResolution?: ExifValue<number, number>;
   ResolutionUnit?: ExifValue<number, ResolutionUnit>;
+  Software?: ExifValue<string, string>;
   ModifyDate?: ExifValue<string, Date>;
   YCbCrPositioning?: ExifValue<number, YCbCrPositioning>;
+  Copyright?: ExifValue<string, string>;
   ExifOffset?: ExifValue<number, number>;
 }
 
 export interface ExifThumbnailData {
   CompressionValue?: ExifValue<number, CompressionValue>;
+  Orientation?: ExifValue<number, Orientation>;
   XResolution?: ExifValue<number, number>;
   YResolution?: ExifValue<number, number>;
   ResolutionUnit?: ExifValue<number, ResolutionUnit>;
   ThumbnailOffset?: ExifValue<number, number>;
   ThumbnailLength?: ExifValue<number, number>;
+  YCbCrPositioning?: ExifValue<number, YCbCrPositioning>;
 }
 
 export interface ExifExifData {
   ExposureTime?: ExifValue<number, number>;
   FNumber?: ExifValue<number, string>;
+  ExposureProgram?: ExifValue<number, ExposureProgram>;
+  ISOSpeedRatings?: ExifValue<number | number[], string>;
   ExifVersion?: ExifValue<Buffer, string>;
   DateTimeOriginal?: ExifValue<string, Date>;
   DateTimeDigitized?: ExifValue<string, Date>;
@@ -119,6 +134,7 @@ export interface ExifExifData {
   CompressedBitsPerPixel?: ExifValue<number, number>;
   ShutterSpeedValue?: ExifValue<number, string>;
   ApertureValue?: ExifValue<number, string>;
+  BrightnessValue?: ExifValue<number, number>;
   ExposureBias?: ExifValue<number, number>;
   MaxApertureValue?: ExifValue<number, string>;
   SubjectDistance?: ExifValue<number, string>;
@@ -137,6 +153,7 @@ export interface ExifExifData {
   FocalPlaneResolutionUnit?: ExifValue<number, FocalPlaneResolutionUnit>;
   SensingMethod?: ExifValue<number, SensingMethod>;
   FileSource?: ExifValue<Buffer, FileSource>;
+  SceneType?: ExifValue<Buffer, SceneType>;
 }
 
 export interface ExifInteropData {
@@ -211,6 +228,19 @@ export type CompressionValue =
   | 'Pentax PEF Compressed'
   | 'Unknown';
 
+export type ExposureProgram =
+  | 'Not Defined'
+  | 'Manual'
+  | 'Program AE'
+  | 'Aperture-priority AE'
+  | 'Shutter speed priority AE'
+  | 'Creative (Slow speed)'
+  | 'Action (High speed)'
+  | 'Portrait'
+  | 'Landscape'
+  | 'Bulb'
+  | 'Unknown';
+
 export type FileSource =
   | 'Film Scanner'
   | 'Reflection Print Scanner'
@@ -262,7 +292,7 @@ export type InteropIndex =
   | 'THM - DCF thumbnail file'
   | 'Unknown';
 
-export type MakerNote = Buffer | MakerNoteCanon | null;
+export type MakerNote = Buffer | MakerNoteCanon | MakerNoteFujiFilm | null;
 
 export type MeteringMode =
   | 'Unknown'
@@ -365,9 +395,15 @@ export type RawCompressionValue =
   | 65000
   | 65535;
 
-export type RawMakerNote = Buffer | RawMakerNoteCanon | null;
+export type RawMakerNote =
+  | Buffer
+  | RawMakerNoteCanon
+  | RawMakerNoteFujiFilm
+  | null;
 
 export type ResolutionUnit = 'None' | 'inches' | 'cm' | 'Unknown';
+
+export type SceneType = 'Directly photographed' | 'Unknown';
 
 export type SensingMethod =
   | 'Not defined'

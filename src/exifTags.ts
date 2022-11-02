@@ -22,15 +22,19 @@ export const EXIF_TAGS: Record<
   0x011a: 'XResolution',
   0x011b: 'YResolution',
   0x0128: 'ResolutionUnit',
+  0x0131: 'Software',
   0x0132: 'ModifyDate',
   0x0201: 'ThumbnailOffset',
   0x0202: 'ThumbnailLength',
   0x0213: 'YCbCrPositioning',
   0x1001: 'RelatedImageWidth',
   0x1002: 'RelatedImageHeight',
+  0x8298: 'Copyright',
   0x829a: 'ExposureTime',
   0x829d: 'FNumber',
   0x8769: 'ExifOffset',
+  0x8822: 'ExposureProgram',
+  0x8827: 'ISOSpeedRatings',
   0x9000: 'ExifVersion',
   0x9003: 'DateTimeOriginal',
   0x9004: 'DateTimeDigitized',
@@ -38,6 +42,7 @@ export const EXIF_TAGS: Record<
   0x9102: 'CompressedBitsPerPixel',
   0x9201: 'ShutterSpeedValue',
   0x9202: 'ApertureValue',
+  0x9203: 'BrightnessValue',
   0x9204: 'ExposureBias',
   0x9205: 'MaxApertureValue',
   0x9206: 'SubjectDistance',
@@ -55,7 +60,8 @@ export const EXIF_TAGS: Record<
   0xa20f: 'FocalPlaneYResolution',
   0xa210: 'FocalPlaneResolutionUnit',
   0xa217: 'SensingMethod',
-  0xa300: 'FileSource'
+  0xa300: 'FileSource',
+  0xa301: 'SceneType'
 };
 
 export const EXIF_GPS_TAGS: Record<number, keyof RawExifGPSData> = {};

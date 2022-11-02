@@ -1,5 +1,6 @@
 import { isDate } from 'util/types';
 import {
+  isArray,
   isBuffer,
   isBufferBetween,
   isInt,
@@ -20,7 +21,7 @@ import {
 const IMAGE_DATE_KEYS = ['ModifyDate'];
 const IMAGE_INTEGER_KEYS = ['ExifOffset'];
 const IMAGE_NUMBER_KEYS = ['XResolution', 'YResolution'];
-const IMAGE_STRING_KEYS = ['Make', 'Model'];
+const IMAGE_STRING_KEYS = ['Copyright', 'Make', 'Model', 'Software'];
 
 const THUMBNAIL_UNSIGNED_INTEGER_KEYS = [
   'CompressionValue',
@@ -31,7 +32,11 @@ const THUMBNAIL_NUMBER_KEYS = ['XResolution', 'YResolution'];
 
 const EXIF_BUFFER_KEYS = ['MakerNote', 'UserComment'];
 const EXIF_DATE_KEYS = ['DateTimeDigitized', 'DateTimeOriginal'];
-const EXIF_SIGNED_NUMBER_KEYS = ['ExposureBias', 'ShutterSpeedValue'];
+const EXIF_SIGNED_NUMBER_KEYS = [
+  'BrightnessValue',
+  'ExposureBias',
+  'ShutterSpeedValue'
+];
 const EXIF_UNSIGNED_NUMBER_KEYS = [
   'ApertureValue',
   'CompressedBitsPerPixel',
@@ -101,7 +106,9 @@ export function filterStrict(tags: RawExifData): RawExifData {
         if (THUMBNAIL_UNSIGNED_INTEGER_KEYS.includes(key))
           return isInt(value) && isPositive(value);
 
+        if (key === 'Orientation') return isIntBetween(value, 1, 8);
         if (key === 'ResolutionUnit') return isIntBetween(value, 1, 3);
+        if (key === 'YCbCrPositioning') return isIntBetween(value, 1, 2);
 
         return true;
       })
@@ -139,10 +146,13 @@ export function filterStrict(tags: RawExifData): RawExifData {
         if (key === 'ComponentsConfiguration')
           return isBufferBetween(value, 4, 4);
         if (key === 'ExifVersion') return isBufferBetween(value, 4, 4);
+        if (key === 'ExposureProgram') return isIntBetween(value, 0, 9);
         if (key === 'FileSource') return isBufferBetween(value, 1, 4);
         if (key === 'FlashpixVersion') return isBufferBetween(value, 4, 4);
         if (key === 'FocalPlaneResolutionUnit')
           return isIntBetween(value, 1, 5);
+        if (key === 'ISOSpeedRatings') return isInt(value) || isArray(value);
+        if (key === 'SceneType') return isBufferBetween(value, 1, 1);
         if (key === 'SensingMethod') return isIntBetween(value, 1, 8);
 
         return true;
