@@ -21,6 +21,7 @@ export interface RawExifData {
 }
 
 export interface RawExifImageData {
+  ImageDescription?: string;
   Make?: string;
   Model?: string;
   Orientation?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
@@ -35,8 +36,16 @@ export interface RawExifImageData {
 }
 
 export interface RawExifThumbnailData {
+  ImageWidth?: number;
+  ImageHeight?: number;
+  BitsPerSample?: number[];
   CompressionValue?: RawCompressionValue;
+  PhotometricInterpretation?: number;
+  PreviewImageStart?: number;
   Orientation?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  SamplesPerPixel?: number;
+  RowsPerStrip?: number;
+  PreviewImageLength?: number;
   XResolution?: number;
   YResolution?: number;
   ResolutionUnit?: 1 | 2 | 3;
@@ -62,6 +71,7 @@ export interface RawExifExifData {
   MaxApertureValue?: number;
   SubjectDistance?: number;
   MeteringMode?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 255;
+  LightSource?: number;
   Flash?: RawFlash;
   FocalLength?: number;
   MakerNote?: RawMakerNote;
@@ -98,6 +108,7 @@ export interface ExifData {
 }
 
 export interface ExifImageData {
+  ImageDescription?: ExifValue<string, string>;
   Make?: ExifValue<string, string>;
   Model?: ExifValue<string, string>;
   Orientation?: ExifValue<number, Orientation>;
@@ -112,8 +123,16 @@ export interface ExifImageData {
 }
 
 export interface ExifThumbnailData {
+  ImageWidth?: ExifValue<number, number>;
+  ImageHeight?: ExifValue<number, number>;
+  BitsPerSample?: ExifValue<number[], number[]>;
   CompressionValue?: ExifValue<number, CompressionValue>;
+  PhotometricInterpretation?: ExifValue<number, PhotometricInterpretation>;
+  PreviewImageStart?: ExifValue<number, number>;
   Orientation?: ExifValue<number, Orientation>;
+  SamplesPerPixel?: ExifValue<number, number>;
+  RowsPerStrip?: ExifValue<number, number>;
+  PreviewImageLength?: ExifValue<number, number>;
   XResolution?: ExifValue<number, number>;
   YResolution?: ExifValue<number, number>;
   ResolutionUnit?: ExifValue<number, ResolutionUnit>;
@@ -139,6 +158,7 @@ export interface ExifExifData {
   MaxApertureValue?: ExifValue<number, string>;
   SubjectDistance?: ExifValue<number, string>;
   MeteringMode?: ExifValue<number, MeteringMode>;
+  LightSource?: ExifValue<number, LightSource>;
   Flash?: ExifValue<number, Flash>;
   FocalLength?: ExifValue<number, string>;
   MakerNote?: MakerNote;
@@ -292,6 +312,31 @@ export type InteropIndex =
   | 'THM - DCF thumbnail file'
   | 'Unknown';
 
+export type LightSource =
+  | 'Unknown'
+  | 'Daylight'
+  | 'Fluorescent'
+  | 'Tungsten (Incandescent)'
+  | 'Flash'
+  | 'Fine Weather'
+  | 'Cloudy'
+  | 'Shade'
+  | 'Daylight Fluorescent'
+  | 'Day White Fluorescent'
+  | 'Cool White Fluorescent'
+  | 'White Fluorescent'
+  | 'Warm White Fluorescent'
+  | 'Standard Light A'
+  | 'Standard Light B'
+  | 'Standard Light C'
+  | 'D55'
+  | 'D65'
+  | 'D75'
+  | 'D50'
+  | 'ISO Studio Tungsten'
+  | 'Other'
+  | 'Unknown';
+
 export type MakerNote = Buffer | MakerNoteCanon | MakerNoteFujiFilm | null;
 
 export type MeteringMode =
@@ -313,6 +358,26 @@ export type Orientation =
   | 'Rotate 90 CW'
   | 'Mirror horizontal and rotate 90 CW'
   | 'Rotate 270 CW'
+  | 'Unknown';
+
+export type PhotometricInterpretation =
+  | 'WhiteIsZero'
+  | 'BlackIsZero'
+  | 'RGB'
+  | 'RGB Palette'
+  | 'Transparency Mask'
+  | 'CMYK'
+  | 'YCbCr'
+  | 'CIELab'
+  | 'ICCLab'
+  | 'ITULab'
+  | 'Color Filter Array'
+  | 'Pixar LogL'
+  | 'Pixar LogLuv'
+  | 'Sequential Color Filter'
+  | 'Linear Raw'
+  | 'Depth Map'
+  | 'Semantic Mask'
   | 'Unknown';
 
 export type RawFlash =

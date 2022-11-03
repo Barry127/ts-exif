@@ -4,6 +4,8 @@ import {
   ExifImageData,
   ExifInteropData,
   ExifThumbnailData,
+  ExifValue,
+  LightSource,
   RawExifData,
   RawExifExifData,
   RawExifImageData,
@@ -11,7 +13,12 @@ import {
   RawExifThumbnailData
 } from './types';
 import { apertureToFNumber } from './helpers/math';
-import { packageNumber, parseDate, parseString } from './helpers/parse';
+import {
+  packageNumber,
+  packageValue,
+  parseDate,
+  parseString
+} from './helpers/parse';
 import { isArray } from './helpers/assert';
 
 export function parseExifData(exif: RawExifData): ExifData {
@@ -35,6 +42,10 @@ function parseImage(rawImage: RawExifImageData): ExifImageData {
 
       case 'ExifOffset':
         image.ExifOffset = packageNumber(rawImage.ExifOffset!);
+        break;
+
+      case 'ImageDescription':
+        image.ImageDescription = parseString(rawImage.ImageDescription!);
         break;
 
       case 'Make':
@@ -183,6 +194,10 @@ function parseThumbnail(rawThumbnail: RawExifThumbnailData): ExifThumbnailData {
   return Object.keys(rawThumbnail).reduce<ExifThumbnailData>(
     (thumbnail, key) => {
       switch (key as keyof ExifThumbnailData) {
+        case 'BitsPerSample':
+          thumbnail.BitsPerSample = packageValue(rawThumbnail.BitsPerSample!);
+          break;
+
         case 'CompressionValue':
           switch (rawThumbnail.CompressionValue) {
             case 1:
@@ -489,6 +504,14 @@ function parseThumbnail(rawThumbnail: RawExifThumbnailData): ExifThumbnailData {
           }
           break;
 
+        case 'ImageHeight':
+          thumbnail.ImageHeight = packageNumber(rawThumbnail.ImageHeight!);
+          break;
+
+        case 'ImageWidth':
+          thumbnail.ImageWidth = packageNumber(rawThumbnail.ImageWidth!);
+          break;
+
         case 'Orientation':
           switch (rawThumbnail.Orientation) {
             case 1:
@@ -547,6 +570,130 @@ function parseThumbnail(rawThumbnail: RawExifThumbnailData): ExifThumbnailData {
           }
           break;
 
+        case 'PhotometricInterpretation':
+          switch (rawThumbnail.PhotometricInterpretation) {
+            case 0:
+              thumbnail.PhotometricInterpretation = {
+                original: rawThumbnail.PhotometricInterpretation,
+                value: 'WhiteIsZero'
+              };
+              break;
+            case 1:
+              thumbnail.PhotometricInterpretation = {
+                original: rawThumbnail.PhotometricInterpretation,
+                value: 'BlackIsZero'
+              };
+              break;
+            case 2:
+              thumbnail.PhotometricInterpretation = {
+                original: rawThumbnail.PhotometricInterpretation,
+                value: 'RGB'
+              };
+              break;
+            case 3:
+              thumbnail.PhotometricInterpretation = {
+                original: rawThumbnail.PhotometricInterpretation,
+                value: 'RGB Palette'
+              };
+              break;
+            case 4:
+              thumbnail.PhotometricInterpretation = {
+                original: rawThumbnail.PhotometricInterpretation,
+                value: 'Transparency Mask'
+              };
+              break;
+            case 5:
+              thumbnail.PhotometricInterpretation = {
+                original: rawThumbnail.PhotometricInterpretation,
+                value: 'CMYK'
+              };
+              break;
+            case 6:
+              thumbnail.PhotometricInterpretation = {
+                original: rawThumbnail.PhotometricInterpretation,
+                value: 'YCbCr'
+              };
+              break;
+            case 8:
+              thumbnail.PhotometricInterpretation = {
+                original: rawThumbnail.PhotometricInterpretation,
+                value: 'CIELab'
+              };
+              break;
+            case 9:
+              thumbnail.PhotometricInterpretation = {
+                original: rawThumbnail.PhotometricInterpretation,
+                value: 'ICCLab'
+              };
+              break;
+            case 10:
+              thumbnail.PhotometricInterpretation = {
+                original: rawThumbnail.PhotometricInterpretation,
+                value: 'ITULab'
+              };
+              break;
+            case 32803:
+              thumbnail.PhotometricInterpretation = {
+                original: rawThumbnail.PhotometricInterpretation,
+                value: 'Color Filter Array'
+              };
+              break;
+            case 32844:
+              thumbnail.PhotometricInterpretation = {
+                original: rawThumbnail.PhotometricInterpretation,
+                value: 'Pixar LogL'
+              };
+              break;
+            case 32845:
+              thumbnail.PhotometricInterpretation = {
+                original: rawThumbnail.PhotometricInterpretation,
+                value: 'Pixar LogLuv'
+              };
+              break;
+            case 32892:
+              thumbnail.PhotometricInterpretation = {
+                original: rawThumbnail.PhotometricInterpretation,
+                value: 'Sequential Color Filter'
+              };
+              break;
+            case 34892:
+              thumbnail.PhotometricInterpretation = {
+                original: rawThumbnail.PhotometricInterpretation,
+                value: 'Linear Raw'
+              };
+              break;
+            case 51177:
+              thumbnail.PhotometricInterpretation = {
+                original: rawThumbnail.PhotometricInterpretation,
+                value: 'Depth Map'
+              };
+              break;
+            case 52527:
+              thumbnail.PhotometricInterpretation = {
+                original: rawThumbnail.PhotometricInterpretation,
+                value: 'Semantic Mask'
+              };
+              break;
+            default:
+              thumbnail.PhotometricInterpretation = {
+                original: rawThumbnail.PhotometricInterpretation!,
+                value: 'Unknown'
+              };
+          }
+          break;
+
+        case 'PreviewImageLength':
+          thumbnail.PreviewImageLength = packageNumber(
+            rawThumbnail.PreviewImageLength!
+          );
+          break;
+
+        case 'PreviewImageStart':
+          thumbnail.PreviewImageStart = packageNumber(
+            rawThumbnail.PreviewImageStart!
+          );
+          break;
+
         case 'ResolutionUnit':
           switch (rawThumbnail.ResolutionUnit) {
             case 1:
@@ -573,6 +720,16 @@ function parseThumbnail(rawThumbnail: RawExifThumbnailData): ExifThumbnailData {
                 value: 'Unknown'
               };
           }
+          break;
+
+        case 'RowsPerStrip':
+          thumbnail.RowsPerStrip = packageNumber(rawThumbnail.RowsPerStrip!);
+          break;
+
+        case 'SamplesPerPixel':
+          thumbnail.SamplesPerPixel = packageNumber(
+            rawThumbnail.SamplesPerPixel!
+          );
           break;
 
         case 'ThumbnailLength':
@@ -1081,6 +1238,10 @@ function parseExif(rawExif: RawExifExifData): ExifExifData {
         exif.InteropOffset = packageNumber(rawExif.InteropOffset!);
         break;
 
+      case 'LightSource':
+        exif.LightSource = parseLightSource(rawExif.LightSource!);
+        break;
+
       case 'MakerNote':
         //@ts-ignore
         exif.MakerNote = rawExif.MakerNote!;
@@ -1317,4 +1478,55 @@ function parseInterop(rawInterop: RawExifInteropData): ExifInteropData {
 
     return interop;
   }, {});
+}
+
+function parseLightSource(value: number): ExifValue<number, LightSource> {
+  switch (value) {
+    case 0:
+      return { original: value, value: 'Unknown' };
+    case 1:
+      return { original: value, value: 'Daylight' };
+    case 2:
+      return { original: value, value: 'Fluorescent' };
+    case 3:
+      return { original: value, value: 'Tungsten (Incandescent)' };
+    case 4:
+      return { original: value, value: 'Flash' };
+    case 9:
+      return { original: value, value: 'Fine Weather' };
+    case 10:
+      return { original: value, value: 'Cloudy' };
+    case 11:
+      return { original: value, value: 'Shade' };
+    case 12:
+      return { original: value, value: 'Daylight Fluorescent' };
+    case 13:
+      return { original: value, value: 'Day White Fluorescent' };
+    case 14:
+      return { original: value, value: 'Cool White Fluorescent' };
+    case 15:
+      return { original: value, value: 'White Fluorescent' };
+    case 16:
+      return { original: value, value: 'Warm White Fluorescent' };
+    case 17:
+      return { original: value, value: 'Standard Light A' };
+    case 18:
+      return { original: value, value: 'Standard Light B' };
+    case 19:
+      return { original: value, value: 'Standard Light C' };
+    case 20:
+      return { original: value, value: 'D55' };
+    case 21:
+      return { original: value, value: 'D65' };
+    case 22:
+      return { original: value, value: 'D75' };
+    case 23:
+      return { original: value, value: 'D50' };
+    case 24:
+      return { original: value, value: 'ISO Studio Tungsten' };
+    case 255:
+      return { original: value, value: 'Other' };
+    default:
+      return { original: value, value: 'Unknown' };
+  }
 }

@@ -21,10 +21,24 @@ import {
 const IMAGE_DATE_KEYS = ['ModifyDate'];
 const IMAGE_INTEGER_KEYS = ['ExifOffset'];
 const IMAGE_NUMBER_KEYS = ['XResolution', 'YResolution'];
-const IMAGE_STRING_KEYS = ['Copyright', 'Make', 'Model', 'Software'];
+const IMAGE_STRING_KEYS = [
+  'Copyright',
+  'ImageDescription',
+  'Make',
+  'Model',
+  'Software'
+];
 
+const THUMBNAIL_ARRAY_KEYS = ['BitsPerSample'];
 const THUMBNAIL_UNSIGNED_INTEGER_KEYS = [
   'CompressionValue',
+  'ImageHeight',
+  'ImageWidth',
+  'PhotometricInterpretation',
+  'PreviewImageLength',
+  'PreviewImageStart',
+  'RowsPerStrip',
+  'SamplesPerPixel',
   'ThumbnailLength',
   'ThumbnailOffset'
 ];
@@ -51,6 +65,7 @@ const EXIF_UNSIGNED_NUMBER_KEYS = [
 const EXIF_UNSIGNED_INTEGER_KEYS = [
   'Flash',
   'InteropOffset',
+  'LightSource',
   'MeteringMode',
   'PixelXDimension',
   'PixelYDimension'
@@ -105,6 +120,9 @@ export function filterStrict(tags: RawExifData): RawExifData {
         //integer keys
         if (THUMBNAIL_UNSIGNED_INTEGER_KEYS.includes(key))
           return isInt(value) && isPositive(value);
+
+        //array keys
+        if (THUMBNAIL_ARRAY_KEYS.includes(key)) return isArray(key);
 
         if (key === 'Orientation') return isIntBetween(value, 1, 8);
         if (key === 'ResolutionUnit') return isIntBetween(value, 1, 3);
