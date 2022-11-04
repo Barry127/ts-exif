@@ -1,6 +1,7 @@
 import { ExifOptions, MakerNote, RawExifData, RawMakerNote } from '../types';
 import { ParseCanon } from './canon';
 import { parseFujiFilm } from './fujiFilm';
+import { parseNikon } from './nikon';
 
 export function parseMakerNote(
   makerNote: Buffer,
@@ -14,6 +15,9 @@ export function parseMakerNote(
 
     case 'fujifilm':
       return parseFujiFilm(makerNote, exifBuffer, rawExif, options);
+
+    case 'nikon':
+      return parseNikon(makerNote, exifBuffer, rawExif, options);
 
     default:
       return makerNote;

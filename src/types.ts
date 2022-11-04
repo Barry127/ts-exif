@@ -1,5 +1,11 @@
 import { MakerNoteCanon, RawMakerNoteCanon } from './makerNote/canon';
 import { MakerNoteFujiFilm, RawMakerNoteFujiFilm } from './makerNote/fujiFilm';
+import {
+  MakerNoteNikon,
+  MakerNoteNikonType2,
+  RawMakerNoteNikon,
+  RawMakerNoteNikonType2
+} from './makerNote/nikon/types';
 
 export interface ExifOptions {
   // Filter invalid tags and invalid value types. Default value true
@@ -337,7 +343,13 @@ export type LightSource =
   | 'Other'
   | 'Unknown';
 
-export type MakerNote = Buffer | MakerNoteCanon | MakerNoteFujiFilm | null;
+export type MakerNote =
+  | Buffer
+  | MakerNoteCanon
+  | MakerNoteFujiFilm
+  | MakerNoteNikon
+  | MakerNoteNikonType2
+  | null;
 
 export type MeteringMode =
   | 'Unknown'
@@ -464,6 +476,8 @@ export type RawMakerNote =
   | Buffer
   | RawMakerNoteCanon
   | RawMakerNoteFujiFilm
+  | RawMakerNoteNikon
+  | RawMakerNoteNikonType2
   | null;
 
 export type ResolutionUnit = 'None' | 'inches' | 'cm' | 'Unknown';
