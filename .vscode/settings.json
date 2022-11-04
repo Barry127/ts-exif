@@ -4,8 +4,11 @@
     "Aspherical",
     "CCIRLEW",
     "CCITT",
+    "commu",
     "Cosina",
     "CTPAD",
+    "DCHC",
+    "DCHT",
     "Distagon",
     "Flashpix",
     "fuji",
@@ -19,6 +22,8 @@
     "Makro",
     "Milvus",
     "nikon",
+    "OLYMP",
+    "olympus",
     "Otus",
     "Rokinon",
     "Samyang",
@@ -30,6 +35,8 @@
     "Tokina",
     "Ultron",
     "Voigtlander",
-    "Yongnuo"
-  ]
+    "Yongnuo",
+    "Zdel"
+  ],
+  "cSpell.ignoreWords": ["wide", "transform"]
 }

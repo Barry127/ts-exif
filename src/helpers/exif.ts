@@ -201,8 +201,10 @@ function read<T extends any>(
     // unsigned float64
     case 5:
       if (buffer.length < offset + 8) return null as T;
-      return (readUInt32(buffer, offset, endian) /
-        readUInt32(buffer, offset + 4, endian)) as T;
+      const ufA = readUInt32(buffer, offset, endian);
+      const ufB = readUInt32(buffer, offset + 4, endian);
+      if (ufA === 0 && ufB === 0) return 0 as T;
+      return (ufA / ufB) as T;
 
     // int8
     case 6:
@@ -222,8 +224,10 @@ function read<T extends any>(
     // float64
     case 10:
       if (buffer.length < offset + 8) return null as T;
-      return (readInt32(buffer, offset, endian) /
-        readInt32(buffer, offset + 4, endian)) as T;
+      const sfA = readInt32(buffer, offset, endian);
+      const sfB = readInt32(buffer, offset + 4, endian);
+      if (sfA === 0 && sfA === 0) return 0 as T;
+      return (sfA / sfB) as T;
 
     default:
       return null as T;

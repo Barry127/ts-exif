@@ -6,6 +6,7 @@ import {
   RawMakerNoteNikon,
   RawMakerNoteNikonType2
 } from './makerNote/nikon/types';
+import { MakerNoteOlympus, RawMakerNoteOlympus } from './makerNote/olympus';
 
 export interface ExifOptions {
   // Filter invalid tags and invalid value types. Default value true
@@ -349,6 +350,7 @@ export type MakerNote =
   | MakerNoteFujiFilm
   | MakerNoteNikon
   | MakerNoteNikonType2
+  | MakerNoteOlympus
   | null;
 
 export type MeteringMode =
@@ -478,6 +480,7 @@ export type RawMakerNote =
   | RawMakerNoteFujiFilm
   | RawMakerNoteNikon
   | RawMakerNoteNikonType2
+  | RawMakerNoteOlympus
   | null;
 
 export type ResolutionUnit = 'None' | 'inches' | 'cm' | 'Unknown';
