@@ -31,13 +31,13 @@ export interface RawExifImageData {
   ImageDescription?: string;
   Make?: string;
   Model?: string;
-  Orientation?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  Orientation?: number;
   XResolution?: number;
   YResolution?: number;
-  ResolutionUnit?: 1 | 2 | 3;
+  ResolutionUnit?: number;
   Software?: string;
   ModifyDate?: string;
-  YCbCrPositioning?: 1 | 2;
+  YCbCrPositioning?: number;
   Copyright?: string;
   ExifOffset?: number;
 }
@@ -46,19 +46,19 @@ export interface RawExifThumbnailData {
   ImageWidth?: number;
   ImageHeight?: number;
   BitsPerSample?: number[];
-  CompressionValue?: RawCompressionValue;
+  CompressionValue?: number;
   PhotometricInterpretation?: number;
   PreviewImageStart?: number;
-  Orientation?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  Orientation?: number;
   SamplesPerPixel?: number;
   RowsPerStrip?: number;
   PreviewImageLength?: number;
   XResolution?: number;
   YResolution?: number;
-  ResolutionUnit?: 1 | 2 | 3;
+  ResolutionUnit?: number;
   ThumbnailOffset?: number;
   ThumbnailLength?: number;
-  YCbCrPositioning?: 1 | 2;
+  YCbCrPositioning?: number;
 }
 
 export interface RawExifExifData {
@@ -77,21 +77,21 @@ export interface RawExifExifData {
   ExposureBias?: number;
   MaxApertureValue?: number;
   SubjectDistance?: number;
-  MeteringMode?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 255;
+  MeteringMode?: number;
   LightSource?: number;
-  Flash?: RawFlash;
+  Flash?: number;
   FocalLength?: number;
   MakerNote?: RawMakerNote;
   UserComment?: Buffer;
   FlashpixVersion?: Buffer;
-  ColorSpace?: 0x1 | 0x2 | 0xfffd | 0xfffe | 0xffff;
+  ColorSpace?: number;
   PixelXDimension?: number;
   PixelYDimension?: number;
   InteropOffset?: number;
   FocalPlaneXResolution?: number;
   FocalPlaneYResolution?: number;
-  FocalPlaneResolutionUnit?: 1 | 2 | 3 | 4 | 5;
-  SensingMethod?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  FocalPlaneResolutionUnit?: number;
+  SensingMethod?: number;
   FileSource?: Buffer;
   SceneType?: Buffer;
 }
@@ -393,86 +393,6 @@ export type PhotometricInterpretation =
   | 'Depth Map'
   | 'Semantic Mask'
   | 'Unknown';
-
-export type RawFlash =
-  | 0x0
-  | 0x1
-  | 0x5
-  | 0x7
-  | 0x8
-  | 0x9
-  | 0xd
-  | 0xf
-  | 0x10
-  | 0x14
-  | 0x18
-  | 0x19
-  | 0x1d
-  | 0x1f
-  | 0x20
-  | 0x30
-  | 0x41
-  | 0x45
-  | 0x47
-  | 0x49
-  | 0x4d
-  | 0x4f
-  | 0x50
-  | 0x58
-  | 0x59
-  | 0x5d
-  | 0x5f;
-
-export type RawCompressionValue =
-  | 1
-  | 2
-  | 3
-  | 4
-  | 5
-  | 6
-  | 7
-  | 8
-  | 9
-  | 10
-  | 99
-  | 262
-  | 32766
-  | 32767
-  | 32769
-  | 32770
-  | 32771
-  | 32772
-  | 32773
-  | 32809
-  | 32867
-  | 32895
-  | 32896
-  | 32897
-  | 32898
-  | 32908
-  | 32909
-  | 32946
-  | 32947
-  | 33003
-  | 33005
-  | 34661
-  | 34676
-  | 34677
-  | 34712
-  | 34713
-  | 34715
-  | 34718
-  | 34719
-  | 34720
-  | 34887
-  | 34892
-  | 34925
-  | 34926
-  | 34927
-  | 34933
-  | 34934
-  | 65000
-  | 65535;
 
 export type RawMakerNote =
   | Buffer

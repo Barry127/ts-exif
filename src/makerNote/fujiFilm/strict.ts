@@ -8,8 +8,12 @@ import { RawMakerNoteFujiFilm } from './types';
 
 const FUJI_FILM_UNSIGNED_INTEGER_KEYS = [
   'AutoBracketing',
+  'BlurWarning',
+  'ExposureWarning',
   'FocusMode',
+  'FocusWarning',
   'FujiFlashMode',
+  'Macro',
   'PictureMode',
   'Sharpness',
   'WhiteBalance'
@@ -32,11 +36,6 @@ export function filterStrict(tags: RawMakerNoteFujiFilm): RawMakerNoteFujiFilm {
       //string values
       if (FUJI_FILM_STRING_KEYS.includes(key)) return isString(value);
 
-      if (key === 'BlurWarning') return isIntBetween(value, 0, 1);
-      if (key === 'ExposureWarning') return isIntBetween(value, 0, 1);
-      if (key === 'FocusWarning') return isIntBetween(value, 0, 1);
-      if (key === 'Macro') return isIntBetween(value, 0, 1);
-      if (key === 'SlowSync') return isIntBetween(value, 0, 1);
       if (key === 'Version') return isBufferBetween(value, 4, 4);
 
       return true;

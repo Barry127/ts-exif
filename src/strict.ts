@@ -19,7 +19,12 @@ import {
 } from './types';
 
 const IMAGE_DATE_KEYS = ['ModifyDate'];
-const IMAGE_INTEGER_KEYS = ['ExifOffset'];
+const IMAGE_SIGNED_INTEGER_KEYS = ['ExifOffset'];
+const IMAGE_UNSIGNED_INTEGER_KEYS = [
+  'Orientation',
+  'ResolutionUnit',
+  'YCbCrPositioning'
+];
 const IMAGE_NUMBER_KEYS = ['XResolution', 'YResolution'];
 const IMAGE_STRING_KEYS = [
   'Copyright',
@@ -34,13 +39,16 @@ const THUMBNAIL_UNSIGNED_INTEGER_KEYS = [
   'CompressionValue',
   'ImageHeight',
   'ImageWidth',
+  'Orientation',
   'PhotometricInterpretation',
   'PreviewImageLength',
   'PreviewImageStart',
+  'ResolutionUnit',
   'RowsPerStrip',
   'SamplesPerPixel',
   'ThumbnailLength',
-  'ThumbnailOffset'
+  'ThumbnailOffset',
+  'YCbCrPositioning'
 ];
 const THUMBNAIL_NUMBER_KEYS = ['XResolution', 'YResolution'];
 
@@ -63,12 +71,16 @@ const EXIF_UNSIGNED_NUMBER_KEYS = [
   'SubjectDistance'
 ];
 const EXIF_UNSIGNED_INTEGER_KEYS = [
+  'ColorSpace',
+  'ExposureProgram',
   'Flash',
+  'FocalPlaneResolutionUnit',
   'InteropOffset',
   'LightSource',
   'MeteringMode',
   'PixelXDimension',
-  'PixelYDimension'
+  'PixelYDimension',
+  'SensingMethod'
 ];
 
 const INTEROP_UNSIGNED_INTEGER_KEYS = [
@@ -88,17 +100,15 @@ export function filterStrict(tags: RawExifData): RawExifData {
         if (IMAGE_NUMBER_KEYS.includes(key)) return isNumber(value);
 
         //integer keys
-        if (IMAGE_INTEGER_KEYS.includes(key)) return isInt(value);
+        if (IMAGE_SIGNED_INTEGER_KEYS.includes(key)) return isInt(value);
+        if (IMAGE_UNSIGNED_INTEGER_KEYS.includes(key))
+          return isInt(value) && isPositive(value);
 
         //string keys
         if (IMAGE_STRING_KEYS.includes(key)) return isString(value);
 
         //date keys
         if (IMAGE_DATE_KEYS.includes(key)) return isDate(value);
-
-        if (key === 'Orientation') return isIntBetween(value, 1, 8);
-        if (key === 'ResolutionUnit') return isIntBetween(value, 1, 3);
-        if (key === 'YCbCrPositioning') return isIntBetween(value, 1, 2);
 
         return true;
       })
@@ -123,10 +133,6 @@ export function filterStrict(tags: RawExifData): RawExifData {
 
         //array keys
         if (THUMBNAIL_ARRAY_KEYS.includes(key)) return isArray(key);
-
-        if (key === 'Orientation') return isIntBetween(value, 1, 8);
-        if (key === 'ResolutionUnit') return isIntBetween(value, 1, 3);
-        if (key === 'YCbCrPositioning') return isIntBetween(value, 1, 2);
 
         return true;
       })
@@ -157,21 +163,13 @@ export function filterStrict(tags: RawExifData): RawExifData {
         //date keys
         if (EXIF_DATE_KEYS.includes(key)) return isDate(value);
 
-        if (key === 'ColorSpace')
-          return (
-            isIntBetween(value, 0x1, 0x2) || isIntBetween(value, 0xfffd, 0xffff)
-          );
         if (key === 'ComponentsConfiguration')
           return isBufferBetween(value, 4, 4);
         if (key === 'ExifVersion') return isBufferBetween(value, 4, 4);
-        if (key === 'ExposureProgram') return isIntBetween(value, 0, 9);
         if (key === 'FileSource') return isBufferBetween(value, 1, 4);
         if (key === 'FlashpixVersion') return isBufferBetween(value, 4, 4);
-        if (key === 'FocalPlaneResolutionUnit')
-          return isIntBetween(value, 1, 5);
         if (key === 'ISOSpeedRatings') return isInt(value) || isArray(value);
         if (key === 'SceneType') return isBufferBetween(value, 1, 1);
-        if (key === 'SensingMethod') return isIntBetween(value, 1, 8);
 
         return true;
       })

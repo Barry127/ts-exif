@@ -7,14 +7,14 @@ export interface RawMakerNoteFujiFilm {
   WhiteBalance?: number;
   FujiFlashMode?: number;
   FlashExposureComp?: number;
-  Macro?: 0 | 1;
-  FocusMode?: 0 | 1 | 65535;
-  SlowSync?: 0 | 1;
+  Macro?: number;
+  FocusMode?: number;
+  SlowSync?: number;
   PictureMode?: number;
   AutoBracketing?: number;
-  BlurWarning?: 0 | 1;
-  FocusWarning?: 0 | 1;
-  ExposureWarning?: 0 | 1;
+  BlurWarning?: number;
+  FocusWarning?: number;
+  ExposureWarning?: number;
 }
 
 export interface MakerNoteFujiFilm {
