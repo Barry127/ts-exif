@@ -8,6 +8,7 @@ import {
 } from './makerNote/nikon/types';
 import { MakerNoteOlympus, RawMakerNoteOlympus } from './makerNote/olympus';
 import { MakerNoteRicohText, RawMakerNoteRicohText } from './makerNote/ricoh';
+import { MakerNoteSanyo, RawMakerNoteSanyo } from './makerNote/sanyo';
 
 export interface ExifOptions {
   // Filter invalid tags and invalid value types. Default value true
@@ -355,6 +356,7 @@ export type MakerNote =
   | MakerNoteNikonType2
   | MakerNoteOlympus
   | MakerNoteRicohText
+  | MakerNoteSanyo
   | null;
 
 export type MeteringMode =
@@ -406,6 +408,7 @@ export type RawMakerNote =
   | RawMakerNoteNikonType2
   | RawMakerNoteOlympus
   | RawMakerNoteRicohText
+  | RawMakerNoteSanyo
   | null;
 
 export type ResolutionUnit = 'None' | 'inches' | 'cm' | 'Unknown';

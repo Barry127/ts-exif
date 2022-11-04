@@ -4,6 +4,7 @@ import { parseFujiFilm } from './fujiFilm';
 import { parseNikon } from './nikon';
 import { parseOlympus } from './olympus';
 import { ParseRicoh } from './ricoh';
+import { parseSanyo } from './sanyo';
 
 export function parseMakerNote(
   makerNote: Buffer,
@@ -26,6 +27,9 @@ export function parseMakerNote(
 
     case 'ricoh':
       return ParseRicoh(makerNote, exifBuffer, rawExif, options);
+
+    case 'sanyo electric co.,ltd.':
+      return parseSanyo(makerNote, exifBuffer, rawExif, options);
 
     default:
       return makerNote;
