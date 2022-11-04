@@ -7,6 +7,7 @@ import {
   RawMakerNoteNikonType2
 } from './makerNote/nikon/types';
 import { MakerNoteOlympus, RawMakerNoteOlympus } from './makerNote/olympus';
+import { MakerNoteRicohText, RawMakerNoteRicohText } from './makerNote/ricoh';
 
 export interface ExifOptions {
   // Filter invalid tags and invalid value types. Default value true
@@ -87,6 +88,7 @@ export interface RawExifExifData {
   ColorSpace?: number;
   PixelXDimension?: number;
   PixelYDimension?: number;
+  RelatedSoundFile?: string;
   InteropOffset?: number;
   FocalPlaneXResolution?: number;
   FocalPlaneYResolution?: number;
@@ -174,6 +176,7 @@ export interface ExifExifData {
   ColorSpace?: ExifValue<number, ColorSpace>;
   PixelXDimension?: ExifValue<number, number>;
   PixelYDimension?: ExifValue<number, number>;
+  RelatedSoundFile?: ExifValue<string, string>;
   InteropOffset?: ExifValue<number, number>;
   FocalPlaneXResolution?: ExifValue<number, number>;
   FocalPlaneYResolution?: ExifValue<number, number>;
@@ -351,6 +354,7 @@ export type MakerNote =
   | MakerNoteNikon
   | MakerNoteNikonType2
   | MakerNoteOlympus
+  | MakerNoteRicohText
   | null;
 
 export type MeteringMode =
@@ -401,6 +405,7 @@ export type RawMakerNote =
   | RawMakerNoteNikon
   | RawMakerNoteNikonType2
   | RawMakerNoteOlympus
+  | RawMakerNoteRicohText
   | null;
 
 export type ResolutionUnit = 'None' | 'inches' | 'cm' | 'Unknown';

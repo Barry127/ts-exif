@@ -36,3 +36,9 @@ export function parseString(rawValue: string): ExifValue<string, string> {
     value: rawValue.replace(/\0/g, '').trim()
   };
 }
+
+export function parseStringAsNumber(
+  rawValue: string
+): ExifValue<string, number> {
+  return { original: rawValue, value: Number(rawValue) };
+}

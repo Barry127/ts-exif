@@ -1320,6 +1320,10 @@ function parseExif(rawExif: RawExifExifData): ExifExifData {
         exif.PixelYDimension = packageNumber(rawExif.PixelYDimension!);
         break;
 
+      case 'RelatedSoundFile':
+        exif.RelatedSoundFile = parseString(rawExif.RelatedSoundFile!);
+        break;
+
       case 'SceneType':
         switch (rawExif.SceneType?.[0]) {
           case 1:

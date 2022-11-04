@@ -1,8 +1,8 @@
-import { isDate } from 'util/types';
 import {
   isArray,
   isBuffer,
   isBufferBetween,
+  isDate,
   isInt,
   isIntBetween,
   isNumber,
@@ -82,6 +82,7 @@ const EXIF_UNSIGNED_INTEGER_KEYS = [
   'PixelYDimension',
   'SensingMethod'
 ];
+const EXIF_STRING_KEYS = ['RelatedSoundFile'];
 
 const INTEROP_UNSIGNED_INTEGER_KEYS = [
   'RelatedImageHeight',
@@ -147,6 +148,9 @@ export function filterStrict(tags: RawExifData): RawExifData {
     result.exif = Object.entries(exif)
       .filter(([key, value]) => {
         if (key.startsWith('0x')) return false;
+
+        //string keys
+        if (EXIF_STRING_KEYS.includes(key)) return isString(value);
 
         //number keys
         if (EXIF_SIGNED_NUMBER_KEYS.includes(key)) return isNumber(value);

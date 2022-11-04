@@ -65,6 +65,7 @@ export const EXIF_TAGS: Record<
   0xa001: 'ColorSpace',
   0xa002: 'PixelXDimension',
   0xa003: 'PixelYDimension',
+  0xa004: 'RelatedSoundFile',
   0xa005: 'InteropOffset',
   0xa20e: 'FocalPlaneXResolution',
   0xa20f: 'FocalPlaneYResolution',

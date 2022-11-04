@@ -3,6 +3,7 @@ import { ParseCanon } from './canon';
 import { parseFujiFilm } from './fujiFilm';
 import { parseNikon } from './nikon';
 import { parseOlympus } from './olympus';
+import { ParseRicoh } from './ricoh';
 
 export function parseMakerNote(
   makerNote: Buffer,
@@ -22,6 +23,9 @@ export function parseMakerNote(
 
     case 'olympus optical co.,ltd':
       return parseOlympus(makerNote, exifBuffer, rawExif, options);
+
+    case 'ricoh':
+      return ParseRicoh(makerNote, exifBuffer, rawExif, options);
 
     default:
       return makerNote;
