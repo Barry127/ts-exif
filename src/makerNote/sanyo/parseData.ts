@@ -1,4 +1,4 @@
-import { packageValue } from '../../helpers/parse';
+import { packageNumber, packageValue } from '../../helpers/parse';
 import { MakerNoteSanyo, RawMakerNoteSanyo } from './types';
 
 export function parseSanyoData(rawTags: RawMakerNoteSanyo): MakerNoteSanyo {
@@ -6,6 +6,29 @@ export function parseSanyoData(rawTags: RawMakerNoteSanyo): MakerNoteSanyo {
     switch (key as keyof MakerNoteSanyo) {
       case 'DataDump':
         tags.DataDump = packageValue(rawTags.DataDump!);
+        break;
+
+      case 'DigitalZoom':
+        tags.DigitalZoom = packageNumber(rawTags.DigitalZoom!);
+        break;
+
+      case 'Macro':
+        switch (rawTags.Macro) {
+          case 0:
+            tags.Macro = { original: rawTags.Macro, value: 'Normal' };
+            break;
+          case 1:
+            tags.Macro = { original: rawTags.Macro, value: 'Macro' };
+            break;
+          case 2:
+            tags.Macro = { original: rawTags.Macro, value: 'View' };
+            break;
+          case 3:
+            tags.Macro = { original: rawTags.Macro, value: 'Manual' };
+            break;
+          default:
+            tags.Macro = { original: rawTags.Macro!, value: 'Unknown' };
+        }
         break;
 
       case 'SpecialMode':
