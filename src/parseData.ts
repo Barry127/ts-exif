@@ -512,6 +512,18 @@ function parseThumbnail(rawThumbnail: RawExifThumbnailData): ExifThumbnailData {
           thumbnail.ImageWidth = packageNumber(rawThumbnail.ImageWidth!);
           break;
 
+        case 'Make':
+          thumbnail.Make = parseString(rawThumbnail.Make!);
+          break;
+
+        case 'Model':
+          thumbnail.Model = parseString(rawThumbnail.Model!);
+          break;
+
+        case 'ModifyDate':
+          thumbnail.ModifyDate = parseDate(rawThumbnail.ModifyDate!);
+          break;
+
         case 'Orientation':
           switch (rawThumbnail.Orientation) {
             case 1:

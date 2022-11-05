@@ -50,6 +50,8 @@ export interface RawExifThumbnailData {
   BitsPerSample?: number[];
   CompressionValue?: number;
   PhotometricInterpretation?: number;
+  Make?: string;
+  Model?: string;
   PreviewImageStart?: number;
   Orientation?: number;
   SamplesPerPixel?: number;
@@ -58,6 +60,7 @@ export interface RawExifThumbnailData {
   XResolution?: number;
   YResolution?: number;
   ResolutionUnit?: number;
+  ModifyDate?: string;
   ThumbnailOffset?: number;
   ThumbnailLength?: number;
   YCbCrPositioning?: number;
@@ -138,6 +141,8 @@ export interface ExifThumbnailData {
   BitsPerSample?: ExifValue<number[], number[]>;
   CompressionValue?: ExifValue<number, CompressionValue>;
   PhotometricInterpretation?: ExifValue<number, PhotometricInterpretation>;
+  Make?: ExifValue<string, string>;
+  Model?: ExifValue<string, string>;
   PreviewImageStart?: ExifValue<number, number>;
   Orientation?: ExifValue<number, Orientation>;
   SamplesPerPixel?: ExifValue<number, number>;
@@ -146,6 +151,7 @@ export interface ExifThumbnailData {
   XResolution?: ExifValue<number, number>;
   YResolution?: ExifValue<number, number>;
   ResolutionUnit?: ExifValue<number, ResolutionUnit>;
+  ModifyDate?: ExifValue<string, Date>;
   ThumbnailOffset?: ExifValue<number, number>;
   ThumbnailLength?: ExifValue<number, number>;
   YCbCrPositioning?: ExifValue<number, YCbCrPositioning>;

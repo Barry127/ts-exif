@@ -34,6 +34,7 @@ const IMAGE_STRING_KEYS = [
   'Software'
 ];
 
+const THUMBNAIL_DATE_KEYS = ['ModifyDate'];
 const THUMBNAIL_ARRAY_KEYS = ['BitsPerSample'];
 const THUMBNAIL_UNSIGNED_INTEGER_KEYS = [
   'CompressionValue',
@@ -51,6 +52,7 @@ const THUMBNAIL_UNSIGNED_INTEGER_KEYS = [
   'YCbCrPositioning'
 ];
 const THUMBNAIL_NUMBER_KEYS = ['XResolution', 'YResolution'];
+const THUMBNAIL_STRING_KEYS = ['Make', 'Model'];
 
 const EXIF_BUFFER_KEYS = ['MakerNote', 'UserComment'];
 const EXIF_DATE_KEYS = ['DateTimeDigitized', 'DateTimeOriginal'];
@@ -125,6 +127,9 @@ export function filterStrict(tags: RawExifData): RawExifData {
       .filter(([key, value]) => {
         if (key.startsWith('0x')) return false;
 
+        //string keys
+        if (THUMBNAIL_STRING_KEYS.includes(key)) return isString(value);
+
         //number keys
         if (THUMBNAIL_NUMBER_KEYS.includes(key)) return isNumber(value);
 
@@ -134,6 +139,9 @@ export function filterStrict(tags: RawExifData): RawExifData {
 
         //array keys
         if (THUMBNAIL_ARRAY_KEYS.includes(key)) return isArray(key);
+
+        //date keys
+        if (THUMBNAIL_DATE_KEYS.includes(key)) return isDate(value);
 
         return true;
       })
