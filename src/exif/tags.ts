@@ -1,0 +1,17 @@
+import {
+  ExifExifData,
+  ExifImageData,
+  ExifInteropData,
+  ExifThumbnailData
+} from './types';
+
+export const EXIF_TAGS: Record<
+  number,
+  | keyof ExifImageData
+  | keyof ExifThumbnailData
+  | keyof ExifExifData
+  | keyof ExifInteropData
+> = {
+  0x010f: 'Make',
+  0x0110: 'Model'
+};

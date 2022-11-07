@@ -2,6 +2,7 @@ build
 dev.ts
 exif.jpg
 _dev
+_src
 
 # Logs
 logs

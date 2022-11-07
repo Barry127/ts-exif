@@ -1,4 +1,3 @@
-export { exif } from './exif';
+export * from './exif/exif';
+export * from './exif/types';
 export * from './types';
-
-export * from './makerNote/canon/types';
