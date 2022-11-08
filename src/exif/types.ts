@@ -68,6 +68,7 @@ export interface ExifExifData {
   ComponentsConfiguration?: Buffer;
   CompressedBitsPerPixel?: UFloat;
   ShutterSpeedValue?: Float;
+  ApertureValue?: UFloat;
 }
 
 export interface ExifGPSData {
@@ -108,6 +109,7 @@ export interface ParsedExifExifData {
   ComponentsConfiguration?: ExifValue<Buffer, string>;
   CompressedBitsPerPixel?: ExifValue<UFloat, UFloat>;
   ShutterSpeedValue?: ExifValue<Float, string>;
+  ApertureValue?: ExifValue<UFloat, string>;
 }
 
 export interface ParsedExifGPSData {

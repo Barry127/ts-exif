@@ -31,5 +31,6 @@ export const EXIF_TAGS: Record<
   0x9004: 'DateTimeDigitized',
   0x9101: 'ComponentsConfiguration',
   0x9102: 'CompressedBitsPerPixel',
-  0x9201: 'ShutterSpeedValue'
+  0x9201: 'ShutterSpeedValue',
+  0x9202: 'ApertureValue'
 };

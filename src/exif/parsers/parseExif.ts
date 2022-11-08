@@ -12,6 +12,7 @@ import {
   ParsedExifInteropData,
   ParsedExifThumbnailData
 } from '../types';
+import { parseApertureValue } from './parseApertureValue';
 import { parseComponentsConfiguration } from './parseComponentsConfiguration';
 import { parseCompressedBitsPerPixel } from './parseCompressedBitsPerPixel';
 import { parseCompression } from './parseCompression';
@@ -64,6 +65,11 @@ export function parseTags(
           | keyof ParsedExifExifData
           | keyof ParsedExifInteropData
       ) {
+        case 'ApertureValue':
+          const ApertureValue = parseApertureValue(value, options);
+          if (ApertureValue !== null) exif.ApertureValue = ApertureValue;
+          break;
+
         case 'ComponentsConfiguration':
           const ComponentsConfiguration = parseComponentsConfiguration(
             value,
