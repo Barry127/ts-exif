@@ -1,5 +1,6 @@
 import { Orientation } from './parsers/parseOrientation';
 import { ResolutionUnit } from './parsers/ParseResolutionUnit';
+import { YCbCrPositioning } from './parsers/parseYCbCrPositioning';
 
 export interface ExifOptions {
   // Filter out invalid tags. Default value true
@@ -43,6 +44,7 @@ export interface ExifImageData {
   YResolution?: UFloat;
   ResolutionUnit?: UInt;
   DateTime?: string;
+  YCbCrPositioning?: UInt;
 }
 
 export interface ExifThumbnailData {
@@ -69,6 +71,7 @@ export interface ParsedExifImageData {
   YResolution?: ExifValue<UFloat, string>;
   ResolutionUnit?: ExifValue<UInt, ResolutionUnit>;
   DateTime?: ExifValue<string, Date>;
+  YCbCrPositioning: ExifValue<UInt, YCbCrPositioning>;
 }
 
 export interface ParsedExifThumbnailData {

@@ -8,16 +8,14 @@ export function parseResolutionUnit(
   if (!isUInt(value)) return null;
   if (options.strictValues && !isNumberBetween(value, 1, 3)) return null;
   if (!options.parseValues) return value;
-  switch (value) {
-    case 1:
-      return { original: value, value: 'None' };
-    case 2:
-      return { original: value, value: 'inches' };
-    case 3:
-      return { original: value, value: 'cm' };
-    default:
-      return { original: value, value: 'Unknown' };
-  }
+  const parsedValue = RESOLUTION_UNIT_MAP[value] ?? 'Unknown';
+  return { original: value, value: parsedValue };
 }
+
+const RESOLUTION_UNIT_MAP: Record<UInt, ResolutionUnit> = {
+  1: 'None',
+  2: 'inches',
+  3: 'cm'
+};
 
 export type ResolutionUnit = 'None' | 'inches' | 'cm' | 'Unknown';

@@ -8,27 +8,20 @@ export function parseOrientation(
   if (!isUInt(value)) return null;
   if (options.strictValues && !isNumberBetween(value, 1, 8)) return null;
   if (!options.parseValues) return value;
-  switch (value) {
-    case 1:
-      return { original: value, value: 'Horizontal (normal)' };
-    case 2:
-      return { original: value, value: 'Mirror horizontal' };
-    case 3:
-      return { original: value, value: 'Rotate 180' };
-    case 4:
-      return { original: value, value: 'Mirror vertical' };
-    case 5:
-      return { original: value, value: 'Mirror horizontal and rotate 270 CW' };
-    case 6:
-      return { original: value, value: 'Rotate 90 CW' };
-    case 7:
-      return { original: value, value: 'Mirror horizontal and rotate 90 CW' };
-    case 8:
-      return { original: value, value: 'Rotate 270 CW' };
-    default:
-      return { original: value, value: 'Unknown' };
-  }
+  const parsedValue = ORIENTATION_MAP[value] ?? 'Unknown';
+  return { original: value, value: parsedValue };
 }
+
+const ORIENTATION_MAP: Record<UInt, Orientation> = {
+  1: 'Horizontal (normal)',
+  2: 'Mirror horizontal',
+  3: 'Rotate 180',
+  4: 'Mirror vertical',
+  5: 'Mirror horizontal and rotate 270 CW',
+  6: 'Rotate 90 CW',
+  7: 'Mirror horizontal and rotate 90 CW',
+  8: 'Rotate 270 CW'
+};
 
 export type Orientation =
   | 'Horizontal (normal)'

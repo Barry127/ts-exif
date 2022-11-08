@@ -19,6 +19,7 @@ import { parseModel } from './parseModel';
 import { parseOrientation } from './parseOrientation';
 import { parseResolutionUnit } from './ParseResolutionUnit';
 import { parseXResolution } from './parseXResolution';
+import { parseYCbCrPositioning } from './parseYCbCrPositioning';
 import { parseYResolution } from './parseYResolution';
 
 export function parseExif(
@@ -51,6 +52,11 @@ export function parseTags(
           | keyof ParsedExifExifData
           | keyof ParsedExifInteropData
       ) {
+        case 'DateTime':
+          const DateTime = parseDateTime(value, options);
+          if (DateTime !== null) exif.DateTime = DateTime;
+          break;
+
         case 'Make':
           const Make = parseMake(value, options);
           if (Make !== null) exif.Make = Make;
@@ -66,24 +72,25 @@ export function parseTags(
           if (Orientation !== null) exif.Orientation = Orientation;
           break;
 
-        case 'XResolution':
-          const XResolution = parseXResolution(value, options, rawExif);
-          if (XResolution !== null) exif.XResolution = XResolution;
-          break;
-
-        case 'YResolution':
-          const YResolution = parseYResolution(value, options, rawExif);
-          if (YResolution !== null) exif.YResolution = YResolution;
-          break;
-
         case 'ResolutionUnit':
           const ResolutionUnit = parseResolutionUnit(value, options);
           if (ResolutionUnit !== null) exif.ResolutionUnit = ResolutionUnit;
           break;
 
-        case 'DateTime':
-          const DateTime = parseDateTime(value, options);
-          if (DateTime !== null) exif.DateTime = DateTime;
+        case 'XResolution':
+          const XResolution = parseXResolution(value, options, rawExif);
+          if (XResolution !== null) exif.XResolution = XResolution;
+          break;
+
+        case 'YCbCrPositioning':
+          const YCbCrPositioning = parseYCbCrPositioning(value, options);
+          if (YCbCrPositioning !== null)
+            exif.YCbCrPositioning = YCbCrPositioning;
+          break;
+
+        case 'YResolution':
+          const YResolution = parseYResolution(value, options, rawExif);
+          if (YResolution !== null) exif.YResolution = YResolution;
           break;
 
         default:
