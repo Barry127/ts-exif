@@ -70,6 +70,7 @@ export interface ExifExifData {
   ShutterSpeedValue?: Float;
   ApertureValue?: UFloat;
   ExposureBias?: Float;
+  MaxApertureValue?: UFloat;
 }
 
 export interface ExifGPSData {
@@ -112,6 +113,7 @@ export interface ParsedExifExifData {
   ShutterSpeedValue?: ExifValue<Float, string>;
   ApertureValue?: ExifValue<UFloat, string>;
   ExposureBias?: ExifValue<Float, string>;
+  MaxApertureValue?: ExifValue<UFloat, string>;
 }
 
 export interface ParsedExifGPSData {

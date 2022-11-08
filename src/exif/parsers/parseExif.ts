@@ -26,6 +26,7 @@ import { parseExposureTime } from './parseExposureTime';
 import { parseFNumber } from './parseFNumber';
 import { parseGPS } from './parseGPS';
 import { parseMake } from './parseMake';
+import { parseMaxApertureValue } from './parseMaxApertureValue';
 import { parseModel } from './parseModel';
 import { parseOrientation } from './parseOrientation';
 import { parseResolutionUnit } from './ParseResolutionUnit';
@@ -139,6 +140,12 @@ export function parseTags(
         case 'Make':
           const Make = parseMake(value, options);
           if (Make !== null) exif.Make = Make;
+          break;
+
+        case 'MaxApertureValue':
+          const MaxApertureValue = parseMaxApertureValue(value, options);
+          if (MaxApertureValue !== null)
+            exif.MaxApertureValue = MaxApertureValue;
           break;
 
         case 'Model':
