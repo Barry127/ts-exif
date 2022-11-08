@@ -64,6 +64,7 @@ export interface ExifExifData {
   ExifVersion?: Buffer;
   DateTimeOriginal?: string;
   DateTimeDigitized?: string;
+  ComponentsConfiguration?: Buffer;
 }
 
 export interface ExifGPSData {
@@ -101,6 +102,7 @@ export interface ParsedExifExifData {
   ExifVersion?: ExifValue<Buffer, string>;
   DateTimeOriginal?: ExifValue<string, Date>;
   DateTimeDigitized?: ExifValue<string, Date>;
+  ComponentsConfiguration?: ExifValue<Buffer, string>;
 }
 
 export interface ParsedExifGPSData {
