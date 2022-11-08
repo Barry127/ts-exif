@@ -59,7 +59,7 @@ export interface ExifThumbnailData {
 }
 
 export interface ExifExifData {
-  key?: any;
+  ExposureTime?: UFloat;
 }
 
 export interface ExifGPSData {
@@ -92,7 +92,7 @@ export interface ParsedExifThumbnailData {
 }
 
 export interface ParsedExifExifData {
-  key?: any;
+  ExposureTime?: ExifValue<UFloat, string>;
 }
 
 export interface ParsedExifGPSData {
