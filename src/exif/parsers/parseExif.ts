@@ -14,6 +14,7 @@ import {
 } from '../types';
 import { parseCompression } from './parseCompression';
 import { parseDateTime } from './parseDateTime';
+import { parseDateTimeOriginal } from './parseDateTimeOriginal';
 import { parseExifOffset } from './parseExifOffset';
 import { parseExifVersion } from './parseExifVersion';
 import { parseExposureTime } from './parseExposureTime';
@@ -67,6 +68,12 @@ export function parseTags(
         case 'DateTime':
           const DateTime = parseDateTime(value, options);
           if (DateTime !== null) exif.DateTime = DateTime;
+          break;
+
+        case 'DateTimeOriginal':
+          const DateTimeOriginal = parseDateTimeOriginal(value, options);
+          if (DateTimeOriginal !== null)
+            exif.DateTimeOriginal = DateTimeOriginal;
           break;
 
         case 'ExifOffset':
