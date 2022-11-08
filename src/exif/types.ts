@@ -19,6 +19,7 @@ export interface ExifOptions {
 
 export type Int = number;
 export type UInt = number;
+export type Float = number;
 export type UFloat = number;
 
 export interface ExifData {
@@ -66,6 +67,7 @@ export interface ExifExifData {
   DateTimeDigitized?: string;
   ComponentsConfiguration?: Buffer;
   CompressedBitsPerPixel?: UFloat;
+  ShutterSpeedValue?: Float;
 }
 
 export interface ExifGPSData {
@@ -105,6 +107,7 @@ export interface ParsedExifExifData {
   DateTimeDigitized?: ExifValue<string, Date>;
   ComponentsConfiguration?: ExifValue<Buffer, string>;
   CompressedBitsPerPixel?: ExifValue<UFloat, UFloat>;
+  ShutterSpeedValue?: ExifValue<Float, string>;
 }
 
 export interface ParsedExifGPSData {

@@ -1,4 +1,4 @@
-import { Int, UFloat, UInt } from '../exif/types';
+import { Float, Int, UFloat, UInt } from '../exif/types';
 
 export function isBuffer(value: unknown): value is Buffer {
   return Buffer.isBuffer(value);
@@ -6,6 +6,10 @@ export function isBuffer(value: unknown): value is Buffer {
 
 export function isExifDate(value: string): value is string {
   return !!value.match(/^(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})$/);
+}
+
+export function isFloat(value: unknown): value is Float {
+  return isNumber(value);
 }
 
 export function isInt(value: unknown): value is Int {

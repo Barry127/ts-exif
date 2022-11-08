@@ -10,5 +10,5 @@ export function parseExposureTime(
   if (!options.parseValues) return value;
   if (value === 0) return { original: value, value: '0' };
 
-  return { original: value, value: `1/${msToSecRatio(value)} sec.` };
+  return { original: value, value: `1/${msToSecRatio(value).toFixed(0)} sec.` };
 }
