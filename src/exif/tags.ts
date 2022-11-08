@@ -29,5 +29,6 @@ export const EXIF_TAGS: Record<
   0x9000: 'ExifVersion',
   0x9003: 'DateTimeOriginal',
   0x9004: 'DateTimeDigitized',
-  0x9101: 'ComponentsConfiguration'
+  0x9101: 'ComponentsConfiguration',
+  0x9102: 'CompressedBitsPerPixel'
 };

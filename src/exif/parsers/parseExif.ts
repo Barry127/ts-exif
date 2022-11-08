@@ -13,6 +13,7 @@ import {
   ParsedExifThumbnailData
 } from '../types';
 import { parseComponentsConfiguration } from './parseComponentsConfiguration';
+import { parseCompressedBitsPerPixel } from './parseCompressedBitsPerPixel';
 import { parseCompression } from './parseCompression';
 import { parseDateTime } from './parseDateTime';
 import { parseDateTimeDigitized } from './parseDateTimeDigitized';
@@ -69,6 +70,15 @@ export function parseTags(
           );
           if (ComponentsConfiguration !== null)
             exif.ComponentsConfiguration = ComponentsConfiguration;
+          break;
+
+        case 'CompressedBitsPerPixel':
+          const CompressedBitsPerPixel = parseCompressedBitsPerPixel(
+            value,
+            options
+          );
+          if (CompressedBitsPerPixel !== null)
+            exif.CompressedBitsPerPixel = CompressedBitsPerPixel;
           break;
 
         case 'Compression':
