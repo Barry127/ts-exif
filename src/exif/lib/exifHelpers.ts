@@ -125,6 +125,8 @@ function readTag<T extends any>(
   if (type === 7)
     return exifBuffer.subarray(valueOffset, valueOffset + valueCount) as T;
 
+  if (valueCount === 1) return readValue(exifBuffer, valueOffset, endian, type);
+
   const result: any[] = [];
   for (let i = 0; i < valueCount && valueOffset < exifBuffer.length; i++) {
     result.push(readValue(exifBuffer, valueOffset, endian, type));

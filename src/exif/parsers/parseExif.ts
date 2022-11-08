@@ -1,3 +1,4 @@
+import { EXIF_TAGS } from '../tags';
 import {
   ExifData,
   ExifExifData,
@@ -14,6 +15,7 @@ import {
 import { parseGPS } from './parseGPS';
 import { parseMake } from './parseMake';
 import { parseModel } from './parseModel';
+import { parseOrientation } from './parseOrientation';
 
 export function parseExif(
   exif: ExifData,
@@ -39,6 +41,7 @@ export function parseTags(
     (exif, [key, value]) => {
       switch (
         key as
+          | keyof typeof EXIF_TAGS
           | keyof ParsedExifImageData
           | keyof ParsedExifThumbnailData
           | keyof ParsedExifExifData
@@ -54,8 +57,12 @@ export function parseTags(
           if (Model !== null) exif.Model = Model;
           break;
 
+        case 'Orientation':
+          const Orientation = parseOrientation(value, options);
+          if (Orientation !== null) exif.Orientation = Orientation;
+          break;
+
         default:
-          //@ts-ignore
           if (!options.strictKeys) exif[key] = value;
       }
 

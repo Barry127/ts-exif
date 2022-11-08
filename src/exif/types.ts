@@ -1,4 +1,4 @@
-import { ExifMake, ExifModel } from './parsers';
+import { Orientation } from './parsers/parseOrientation';
 
 export interface ExifOptions {
   // Filter out invalid tags. Default value true
@@ -13,6 +13,9 @@ export interface ExifOptions {
   // parse MakerNote data. Results vary depending on public information of camera MakerNote format. If false result is a buffer. Default value true
   parseMakerNote: boolean;
 }
+
+export type Int = number;
+export type UInt = number;
 
 export interface ExifData {
   image: ExifImageData;
@@ -33,6 +36,7 @@ export interface ParsedExifData {
 export interface ExifImageData {
   Make?: string;
   Model?: string;
+  Orientation?: UInt;
 }
 
 export interface ExifThumbnailData {
@@ -52,8 +56,9 @@ export interface ExifInteropData {
 }
 
 export interface ParsedExifImageData {
-  Make?: ExifMake;
-  Model?: ExifModel;
+  Make?: ExifValue<string, string>;
+  Model?: ExifValue<string, string>;
+  Orientation?: ExifValue<UInt, Orientation>;
 }
 
 export interface ParsedExifThumbnailData {
@@ -73,8 +78,6 @@ export interface ParsedExifInteropData {
 }
 
 export interface ExifValue<O, T> {
-  tagId: string;
-  tagName: string;
-  value: O;
-  parsedValue: T;
+  original: O;
+  value: T;
 }
