@@ -16,6 +16,9 @@ import { parseGPS } from './parseGPS';
 import { parseMake } from './parseMake';
 import { parseModel } from './parseModel';
 import { parseOrientation } from './parseOrientation';
+import { parseResolutionUnit } from './ParseResolutionUnit';
+import { parseXResolution } from './parseXResolution';
+import { parseYResolution } from './parseYResolution';
 
 export function parseExif(
   exif: ExifData,
@@ -34,10 +37,10 @@ export function parseExif(
 }
 
 export function parseTags(
-  exif: ExifImageData | ExifThumbnailData | ExifExifData | ExifInteropData,
+  rawExif: ExifImageData | ExifThumbnailData | ExifExifData | ExifInteropData,
   options: ExifOptions
 ): any {
-  return Object.entries(exif).reduce<Record<string, any>>(
+  return Object.entries(rawExif).reduce<Record<string, any>>(
     (exif, [key, value]) => {
       switch (
         key as
@@ -60,6 +63,21 @@ export function parseTags(
         case 'Orientation':
           const Orientation = parseOrientation(value, options);
           if (Orientation !== null) exif.Orientation = Orientation;
+          break;
+
+        case 'XResolution':
+          const XResolution = parseXResolution(value, options, rawExif);
+          if (XResolution !== null) exif.XResolution = XResolution;
+          break;
+
+        case 'YResolution':
+          const YResolution = parseYResolution(value, options, rawExif);
+          if (YResolution !== null) exif.YResolution = YResolution;
+          break;
+
+        case 'ResolutionUnit':
+          const ResolutionUnit = parseResolutionUnit(value, options);
+          if (ResolutionUnit !== null) exif.ResolutionUnit = ResolutionUnit;
           break;
 
         default:

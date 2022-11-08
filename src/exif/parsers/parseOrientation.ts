@@ -5,8 +5,8 @@ export function parseOrientation(
   value: UInt,
   options: ExifOptions
 ): ExifValue<UInt, Orientation> | UInt | null {
-  if (!isUInt(value)) return -1;
-  if (options.strictValues && !isNumberBetween(value, 0, 8)) return null;
+  if (!isUInt(value)) return null;
+  if (options.strictValues && !isNumberBetween(value, 1, 8)) return null;
   if (!options.parseValues) return value;
   switch (value) {
     case 1:

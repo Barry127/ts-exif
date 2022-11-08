@@ -1,4 +1,4 @@
-import { Int, UInt } from '../exif/types';
+import { Int, UFloat, UInt } from '../exif/types';
 
 export function isBuffer(value: unknown): value is Buffer {
   return Buffer.isBuffer(value);
@@ -22,6 +22,10 @@ export function isNumberBetween(
 
 export function isString(value: unknown): value is string {
   return typeof value === 'string';
+}
+
+export function isUFloat(value: unknown): value is UFloat {
+  return isNumber(value) && isNumberBetween(value, 0);
 }
 
 export function isUInt(value: unknown): value is UInt {

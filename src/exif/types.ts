@@ -1,4 +1,5 @@
 import { Orientation } from './parsers/parseOrientation';
+import { ResolutionUnit } from './parsers/ParseResolutionUnit';
 
 export interface ExifOptions {
   // Filter out invalid tags. Default value true
@@ -16,6 +17,7 @@ export interface ExifOptions {
 
 export type Int = number;
 export type UInt = number;
+export type UFloat = number;
 
 export interface ExifData {
   image: ExifImageData;
@@ -37,6 +39,9 @@ export interface ExifImageData {
   Make?: string;
   Model?: string;
   Orientation?: UInt;
+  XResolution?: UFloat;
+  YResolution?: UFloat;
+  ResolutionUnit?: UInt;
 }
 
 export interface ExifThumbnailData {
@@ -59,6 +64,9 @@ export interface ParsedExifImageData {
   Make?: ExifValue<string, string>;
   Model?: ExifValue<string, string>;
   Orientation?: ExifValue<UInt, Orientation>;
+  XResolution?: ExifValue<UFloat, string>;
+  YResolution?: ExifValue<UFloat, string>;
+  ResolutionUnit?: ExifValue<UInt, ResolutionUnit>;
 }
 
 export interface ParsedExifThumbnailData {
