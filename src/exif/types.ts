@@ -1,3 +1,4 @@
+import { Compression } from './parsers/parseCompression';
 import { Orientation } from './parsers/parseOrientation';
 import { ResolutionUnit } from './parsers/ParseResolutionUnit';
 import { YCbCrPositioning } from './parsers/parseYCbCrPositioning';
@@ -49,6 +50,7 @@ export interface ExifImageData {
 }
 
 export interface ExifThumbnailData {
+  Compression?: UInt;
   XResolution?: UFloat;
   YResolution?: UFloat;
   ResolutionUnit?: UInt;
@@ -79,6 +81,7 @@ export interface ParsedExifImageData {
 }
 
 export interface ParsedExifThumbnailData {
+  Compression?: ExifValue<UInt, Compression>;
   XResolution?: ExifValue<UFloat, string>;
   YResolution?: ExifValue<UFloat, string>;
   ResolutionUnit?: ExifValue<UInt, ResolutionUnit>;

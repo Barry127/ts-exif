@@ -12,6 +12,7 @@ import {
   ParsedExifInteropData,
   ParsedExifThumbnailData
 } from '../types';
+import { parseCompression } from './parseCompression';
 import { parseDateTime } from './parseDateTime';
 import { parseExifOffset } from './parseExifOffset';
 import { parseGPS } from './parseGPS';
@@ -53,6 +54,11 @@ export function parseTags(
           | keyof ParsedExifExifData
           | keyof ParsedExifInteropData
       ) {
+        case 'Compression':
+          const Compression = parseCompression(value, options);
+          if (Compression !== null) exif.Compression = Compression;
+          break;
+
         case 'DateTime':
           const DateTime = parseDateTime(value, options);
           if (DateTime !== null) exif.DateTime = DateTime;
