@@ -45,6 +45,7 @@ export interface ExifImageData {
   ResolutionUnit?: UInt;
   DateTime?: string;
   YCbCrPositioning?: UInt;
+  ExifOffset?: UInt;
 }
 
 export interface ExifThumbnailData {
@@ -72,6 +73,7 @@ export interface ParsedExifImageData {
   ResolutionUnit?: ExifValue<UInt, ResolutionUnit>;
   DateTime?: ExifValue<string, Date>;
   YCbCrPositioning: ExifValue<UInt, YCbCrPositioning>;
+  ExifOffset: ExifValue<UInt, UInt>;
 }
 
 export interface ParsedExifThumbnailData {

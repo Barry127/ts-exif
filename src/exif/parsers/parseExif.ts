@@ -13,6 +13,7 @@ import {
   ParsedExifThumbnailData
 } from '../types';
 import { parseDateTime } from './parseDateTime';
+import { parseExifOffset } from './parseExifOffset';
 import { parseGPS } from './parseGPS';
 import { parseMake } from './parseMake';
 import { parseModel } from './parseModel';
@@ -55,6 +56,11 @@ export function parseTags(
         case 'DateTime':
           const DateTime = parseDateTime(value, options);
           if (DateTime !== null) exif.DateTime = DateTime;
+          break;
+
+        case 'ExifOffset':
+          const ExifOffset = parseExifOffset(value, options);
+          if (ExifOffset !== null) exif.ExifOffset = ExifOffset;
           break;
 
         case 'Make':

@@ -1,5 +1,9 @@
 import { ExifValue } from '../types';
 
+export function packageValue<T>(value: T): ExifValue<T, T> {
+  return { original: value, value };
+}
+
 export function parseExifDate(value: string): ExifValue<string, Date> {
   const match = value.match(
     /^(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})$/
