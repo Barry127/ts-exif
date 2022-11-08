@@ -12,6 +12,7 @@ import {
   ParsedExifInteropData,
   ParsedExifThumbnailData
 } from '../types';
+import { parseDateTime } from './parseDateTime';
 import { parseGPS } from './parseGPS';
 import { parseMake } from './parseMake';
 import { parseModel } from './parseModel';
@@ -78,6 +79,11 @@ export function parseTags(
         case 'ResolutionUnit':
           const ResolutionUnit = parseResolutionUnit(value, options);
           if (ResolutionUnit !== null) exif.ResolutionUnit = ResolutionUnit;
+          break;
+
+        case 'DateTime':
+          const DateTime = parseDateTime(value, options);
+          if (DateTime !== null) exif.DateTime = DateTime;
           break;
 
         default:

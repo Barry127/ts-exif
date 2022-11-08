@@ -4,6 +4,10 @@ export function isBuffer(value: unknown): value is Buffer {
   return Buffer.isBuffer(value);
 }
 
+export function isExifDate(value: string): value is string {
+  return !!value.match(/^(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})$/);
+}
+
 export function isInt(value: unknown): value is Int {
   return isNumber(value) && Math.floor(value) === value;
 }
