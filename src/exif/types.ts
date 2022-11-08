@@ -49,7 +49,9 @@ export interface ExifImageData {
 }
 
 export interface ExifThumbnailData {
-  key?: any;
+  XResolution?: UFloat;
+  YResolution?: UFloat;
+  ResolutionUnit?: UInt;
 }
 
 export interface ExifExifData {
@@ -77,7 +79,9 @@ export interface ParsedExifImageData {
 }
 
 export interface ParsedExifThumbnailData {
-  key?: any;
+  XResolution?: ExifValue<UFloat, string>;
+  YResolution?: ExifValue<UFloat, string>;
+  ResolutionUnit?: ExifValue<UInt, ResolutionUnit>;
 }
 
 export interface ParsedExifExifData {

@@ -1,8 +1,16 @@
-import { isBuffer } from '../lib/assert';
+import { isBuffer, isUInt } from '../lib/assert';
+import { readUInt16, readUInt32 } from '../lib/buffer';
 import { isExifBuffer, parseTiffHeader, readTags } from './lib/exifHelpers';
 import { parseExif } from './parsers';
 import { EXIF_TAGS } from './tags';
-import { ExifData, ExifImageData, ExifOptions, ParsedExifData } from './types';
+import {
+  ExifData,
+  ExifExifData,
+  ExifImageData,
+  ExifOptions,
+  ExifThumbnailData,
+  ParsedExifData
+} from './types';
 
 const DEFAULT_OPTIONS: ExifOptions = {
   strictKeys: true,
@@ -47,6 +55,33 @@ export function exif(
   let result: ExifData = {
     image: ifd0
   };
+
+  if (buffer.length >= offset + 2) {
+    const ifd0EntryCount = readUInt16(buffer, offset, endian);
+    offset += 2 + ifd0EntryCount * 12;
+    if (buffer.length >= offset) {
+      const thumbnailOffset = readUInt32(buffer, offset, endian);
+      if (thumbnailOffset > 0) {
+        const thumbnail = readTags<ExifThumbnailData>(
+          buffer,
+          thumbnailOffset + 6,
+          endian,
+          EXIF_TAGS
+        );
+        if (thumbnail !== null) result.thumbnail = thumbnail;
+      }
+    }
+  }
+
+  if (isUInt(ifd0.ExifOffset)) {
+    const exif = readTags<ExifExifData>(
+      buffer,
+      ifd0.ExifOffset + 6,
+      endian,
+      EXIF_TAGS
+    );
+    if (exif !== null) result.exif = exif;
+  }
 
   return parseExif(result, { ...DEFAULT_OPTIONS, ...options });
 }
