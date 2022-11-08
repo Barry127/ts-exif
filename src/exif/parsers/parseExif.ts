@@ -14,6 +14,7 @@ import {
 } from '../types';
 import { parseCompression } from './parseCompression';
 import { parseDateTime } from './parseDateTime';
+import { parseDateTimeDigitized } from './parseDateTimeDigitized';
 import { parseDateTimeOriginal } from './parseDateTimeOriginal';
 import { parseExifOffset } from './parseExifOffset';
 import { parseExifVersion } from './parseExifVersion';
@@ -68,6 +69,12 @@ export function parseTags(
         case 'DateTime':
           const DateTime = parseDateTime(value, options);
           if (DateTime !== null) exif.DateTime = DateTime;
+          break;
+
+        case 'DateTimeDigitized':
+          const DateTimeDigitized = parseDateTimeDigitized(value, options);
+          if (DateTimeDigitized !== null)
+            exif.DateTimeDigitized = DateTimeDigitized;
           break;
 
         case 'DateTimeOriginal':

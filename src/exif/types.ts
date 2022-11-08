@@ -63,6 +63,7 @@ export interface ExifExifData {
   FNumber?: UFloat;
   ExifVersion?: Buffer;
   DateTimeOriginal?: string;
+  DateTimeDigitized?: string;
 }
 
 export interface ExifGPSData {
@@ -99,6 +100,7 @@ export interface ParsedExifExifData {
   FNumber?: ExifValue<UFloat, string>;
   ExifVersion?: ExifValue<Buffer, string>;
   DateTimeOriginal?: ExifValue<string, Date>;
+  DateTimeDigitized?: ExifValue<string, Date>;
 }
 
 export interface ParsedExifGPSData {

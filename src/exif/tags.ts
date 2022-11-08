@@ -27,5 +27,6 @@ export const EXIF_TAGS: Record<
   0x829d: 'FNumber',
   0x8769: 'ExifOffset',
   0x9000: 'ExifVersion',
-  0x9003: 'DateTimeOriginal'
+  0x9003: 'DateTimeOriginal',
+  0x9004: 'DateTimeDigitized'
 };
