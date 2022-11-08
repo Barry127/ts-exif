@@ -20,6 +20,7 @@ import { parseMake } from './parseMake';
 import { parseModel } from './parseModel';
 import { parseOrientation } from './parseOrientation';
 import { parseResolutionUnit } from './ParseResolutionUnit';
+import { parseThumbnailOffset } from './parseThumbnailOffset';
 import { parseXResolution } from './parseXResolution';
 import { parseYCbCrPositioning } from './parseYCbCrPositioning';
 import { parseYResolution } from './parseYResolution';
@@ -87,6 +88,11 @@ export function parseTags(
         case 'ResolutionUnit':
           const ResolutionUnit = parseResolutionUnit(value, options);
           if (ResolutionUnit !== null) exif.ResolutionUnit = ResolutionUnit;
+          break;
+
+        case 'ThumbnailOffset':
+          const ThumbnailOffset = parseThumbnailOffset(value, options);
+          if (ThumbnailOffset !== null) exif.ThumbnailOffset = ThumbnailOffset;
           break;
 
         case 'XResolution':

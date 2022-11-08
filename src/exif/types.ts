@@ -54,6 +54,7 @@ export interface ExifThumbnailData {
   XResolution?: UFloat;
   YResolution?: UFloat;
   ResolutionUnit?: UInt;
+  ThumbnailOffset?: UInt;
 }
 
 export interface ExifExifData {
@@ -85,6 +86,7 @@ export interface ParsedExifThumbnailData {
   XResolution?: ExifValue<UFloat, string>;
   YResolution?: ExifValue<UFloat, string>;
   ResolutionUnit?: ExifValue<UInt, ResolutionUnit>;
+  ThumbnailOffset?: ExifValue<UInt, UInt>;
 }
 
 export interface ParsedExifExifData {
