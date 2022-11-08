@@ -33,6 +33,13 @@ export function parseString(value: string): ExifValue<string, string> {
   };
 }
 
+export function parseVersion(value: Buffer): ExifValue<Buffer, string> {
+  return {
+    original: value,
+    value: value!.toString('ascii', 1, 4).split('').join('.')
+  };
+}
+
 export function trimString(value: string): string {
   return value.replace(/\0/g, '').trim();
 }

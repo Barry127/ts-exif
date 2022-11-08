@@ -25,5 +25,6 @@ export const EXIF_TAGS: Record<
   0x0213: 'YCbCrPositioning',
   0x829a: 'ExposureTime',
   0x829d: 'FNumber',
-  0x8769: 'ExifOffset'
+  0x8769: 'ExifOffset',
+  0x9000: 'ExifVersion'
 };

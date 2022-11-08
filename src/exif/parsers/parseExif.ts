@@ -15,6 +15,7 @@ import {
 import { parseCompression } from './parseCompression';
 import { parseDateTime } from './parseDateTime';
 import { parseExifOffset } from './parseExifOffset';
+import { parseExifVersion } from './parseExifVersion';
 import { parseExposureTime } from './parseExposureTime';
 import { parseFNumber } from './parseFNumber';
 import { parseGPS } from './parseGPS';
@@ -71,6 +72,11 @@ export function parseTags(
         case 'ExifOffset':
           const ExifOffset = parseExifOffset(value, options);
           if (ExifOffset !== null) exif.ExifOffset = ExifOffset;
+          break;
+
+        case 'ExifVersion':
+          const ExifVersion = parseExifVersion(value, options);
+          if (ExifVersion !== null) exif.ExifVersion = ExifVersion;
           break;
 
         case 'ExposureTime':
