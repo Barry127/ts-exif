@@ -60,6 +60,7 @@ export interface ExifThumbnailData {
 
 export interface ExifExifData {
   ExposureTime?: UFloat;
+  FNumber?: UFloat;
 }
 
 export interface ExifGPSData {
@@ -93,6 +94,7 @@ export interface ParsedExifThumbnailData {
 
 export interface ParsedExifExifData {
   ExposureTime?: ExifValue<UFloat, string>;
+  FNumber?: ExifValue<UFloat, string>;
 }
 
 export interface ParsedExifGPSData {
