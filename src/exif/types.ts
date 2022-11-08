@@ -69,6 +69,7 @@ export interface ExifExifData {
   CompressedBitsPerPixel?: UFloat;
   ShutterSpeedValue?: Float;
   ApertureValue?: UFloat;
+  ExposureBias?: Float;
 }
 
 export interface ExifGPSData {
@@ -110,6 +111,7 @@ export interface ParsedExifExifData {
   CompressedBitsPerPixel?: ExifValue<UFloat, UFloat>;
   ShutterSpeedValue?: ExifValue<Float, string>;
   ApertureValue?: ExifValue<UFloat, string>;
+  ExposureBias?: ExifValue<Float, string>;
 }
 
 export interface ParsedExifGPSData {

@@ -21,6 +21,7 @@ import { parseDateTimeDigitized } from './parseDateTimeDigitized';
 import { parseDateTimeOriginal } from './parseDateTimeOriginal';
 import { parseExifOffset } from './parseExifOffset';
 import { parseExifVersion } from './parseExifVersion';
+import { parseExposureBias } from './parseExposureBias';
 import { parseExposureTime } from './parseExposureTime';
 import { parseFNumber } from './parseFNumber';
 import { parseGPS } from './parseGPS';
@@ -113,6 +114,11 @@ export function parseTags(
         case 'ExifOffset':
           const ExifOffset = parseExifOffset(value, options);
           if (ExifOffset !== null) exif.ExifOffset = ExifOffset;
+          break;
+
+        case 'ExposureBias':
+          const ExposureBias = parseExposureBias(value, options);
+          if (ExposureBias !== null) exif.ExposureBias = ExposureBias;
           break;
 
         case 'ExifVersion':
