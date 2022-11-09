@@ -35,6 +35,7 @@ import { parseFocalPlaneYResolution } from './parseFocalPlaneYResolution';
 import { parseGPS } from './parseGPS';
 import { parseInteropIndex } from './parseInteropIndex';
 import { parseInteropOffset } from './parseInteropOffset';
+import { parseInteropVersion } from './parseInteropVersion';
 import { parseMake } from './parseMake';
 import { parseMakerNote } from './parseMakerNote';
 import { parseMaxApertureValue } from './parseMaxApertureValue';
@@ -217,6 +218,11 @@ export function parseTags(
         case 'InteropOffset':
           const InteropOffset = parseInteropOffset(value, options);
           if (InteropOffset !== null) exif.InteropOffset = InteropOffset;
+          break;
+
+        case 'InteropVersion':
+          const InteropVersion = parseInteropVersion(value, options);
+          if (InteropVersion !== null) exif.InteropVersion = InteropVersion;
           break;
 
         case 'Make':

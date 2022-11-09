@@ -105,6 +105,7 @@ export interface ExifGPSData {
 
 export interface ExifInteropData {
   InteropIndex?: string;
+  InteropVersion?: Buffer;
 }
 
 export interface ParsedExifImageData {
@@ -164,6 +165,7 @@ export interface ParsedExifGPSData {
 
 export interface ParsedExifInteropData {
   InteropIndex?: ExifValue<string, InteropIndex>;
+  InteropVersion?: ExifValue<Buffer, string>;
 }
 
 export interface ExifValue<O, T> {
