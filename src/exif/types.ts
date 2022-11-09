@@ -1,4 +1,5 @@
 import { Compression } from './parsers/parseCompression';
+import { Flash } from './parsers/parseFlash';
 import { MeteringMode } from './parsers/parseMeteringMode';
 import { Orientation } from './parsers/parseOrientation';
 import { ResolutionUnit } from './parsers/ParseResolutionUnit';
@@ -74,6 +75,7 @@ export interface ExifExifData {
   MaxApertureValue?: UFloat;
   SubjectDistance?: UFloat;
   MeteringMode?: UInt;
+  Flash?: UInt;
 }
 
 export interface ExifGPSData {
@@ -119,6 +121,7 @@ export interface ParsedExifExifData {
   MaxApertureValue?: ExifValue<UFloat, string>;
   SubjectDistance?: ExifValue<UFloat, string>;
   MeteringMode?: ExifValue<UInt, MeteringMode>;
+  Flash?: ExifValue<UInt, Flash>;
 }
 
 export interface ParsedExifGPSData {

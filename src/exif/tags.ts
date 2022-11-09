@@ -36,5 +36,6 @@ export const EXIF_TAGS: Record<
   0x9204: 'ExposureBias',
   0x9205: 'MaxApertureValue',
   0x9206: 'SubjectDistance',
-  0x9207: 'MeteringMode'
+  0x9207: 'MeteringMode',
+  0x9209: 'Flash'
 };
