@@ -33,6 +33,7 @@ import { parseFocalPlaneResolutionUnit } from './parseFocalPlaneResolutionUnit';
 import { parseFocalPlaneXResolution } from './parseFocalPlaneXResolution';
 import { parseFocalPlaneYResolution } from './parseFocalPlaneYResolution';
 import { parseGPS } from './parseGPS';
+import { parseInteropIndex } from './parseInteropIndex';
 import { parseInteropOffset } from './parseInteropOffset';
 import { parseMake } from './parseMake';
 import { parseMakerNote } from './parseMakerNote';
@@ -206,6 +207,11 @@ export function parseTags(
           );
           if (FocalPlaneYResolution !== null)
             exif.FocalPlaneYResolution = FocalPlaneYResolution;
+          break;
+
+        case 'InteropIndex':
+          const InteropIndex = parseInteropIndex(value, options);
+          if (InteropIndex !== null) exif.InteropIndex = InteropIndex;
           break;
 
         case 'InteropOffset':

@@ -12,6 +12,7 @@ export const EXIF_TAGS: Record<
   | keyof ExifExifData
   | keyof ExifInteropData
 > = {
+  0x0001: 'InteropIndex',
   0x0103: 'Compression',
   0x010f: 'Make',
   0x0110: 'Model',

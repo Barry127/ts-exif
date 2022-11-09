@@ -4,6 +4,7 @@ import { Compression } from './parsers/parseCompression';
 import { FileSource } from './parsers/parseFileSource';
 import { Flash } from './parsers/parseFlash';
 import { FocalPlaneResolutionUnit } from './parsers/parseFocalPlaneResolutionUnit';
+import { InteropIndex } from './parsers/parseInteropIndex';
 import { MeteringMode } from './parsers/parseMeteringMode';
 import { Orientation } from './parsers/parseOrientation';
 import { ResolutionUnit } from './parsers/ParseResolutionUnit';
@@ -103,7 +104,7 @@ export interface ExifGPSData {
 }
 
 export interface ExifInteropData {
-  key?: any;
+  InteropIndex?: string;
 }
 
 export interface ParsedExifImageData {
@@ -162,7 +163,7 @@ export interface ParsedExifGPSData {
 }
 
 export interface ParsedExifInteropData {
-  key?: any;
+  InteropIndex?: ExifValue<string, InteropIndex>;
 }
 
 export interface ExifValue<O, T> {
