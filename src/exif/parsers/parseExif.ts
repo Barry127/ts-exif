@@ -24,6 +24,7 @@ import { parseExifOffset } from './parseExifOffset';
 import { parseExifVersion } from './parseExifVersion';
 import { parseExposureBias } from './parseExposureBias';
 import { parseExposureTime } from './parseExposureTime';
+import { parseFileSource } from './parseFileSource';
 import { parseFlash } from './parseFlash';
 import { parseFlashpixVersion } from './parseFlashpixVersion';
 import { parseFNumber } from './parseFNumber';
@@ -156,6 +157,11 @@ export function parseTags(
         case 'FNumber':
           const FNumber = parseFNumber(value, options);
           if (FNumber !== null) exif.FNumber = FNumber;
+          break;
+
+        case 'FileSource':
+          const FileSource = parseFileSource(value, options);
+          if (FileSource !== null) exif.FileSource = FileSource;
           break;
 
         case 'Flash':
