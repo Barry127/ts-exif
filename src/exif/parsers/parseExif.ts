@@ -38,6 +38,7 @@ import { parseShutterSpeedValue } from './parseShutterSpeedValue';
 import { parseSubjectDistance } from './parseSubjectDistance';
 import { parseThumbnailLength } from './parseThumbnailLength';
 import { parseThumbnailOffset } from './parseThumbnailOffset';
+import { parseUserComment } from './parseUserComment';
 import { parseXResolution } from './parseXResolution';
 import { parseYCbCrPositioning } from './parseYCbCrPositioning';
 import { parseYResolution } from './parseYResolution';
@@ -208,6 +209,11 @@ export function parseTags(
         case 'ThumbnailOffset':
           const ThumbnailOffset = parseThumbnailOffset(value, options);
           if (ThumbnailOffset !== null) exif.ThumbnailOffset = ThumbnailOffset;
+          break;
+
+        case 'UserComment':
+          const UserComment = parseUserComment(value, options);
+          if (UserComment !== null) exif.UserComment = UserComment;
           break;
 
         case 'XResolution':

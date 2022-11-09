@@ -39,5 +39,6 @@ export const EXIF_TAGS: Record<
   0x9207: 'MeteringMode',
   0x9209: 'Flash',
   0x920a: 'FocalLength',
-  0x927c: 'MakerNote'
+  0x927c: 'MakerNote',
+  0x9286: 'UserComment'
 };

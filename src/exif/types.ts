@@ -81,6 +81,7 @@ export interface ExifExifData {
   Flash?: UInt;
   FocalLength?: UFloat;
   MakerNote?: Buffer;
+  UserComment?: Buffer;
 }
 
 export interface ExifGPSData {
@@ -129,6 +130,7 @@ export interface ParsedExifExifData {
   Flash?: ExifValue<UInt, Flash>;
   FocalLength?: ExifValue<UFloat, string>;
   MakerNote?: ExifValue<Buffer, Buffer>;
+  UserComment?: ExifValue<Buffer, string>;
 }
 
 export interface ParsedExifGPSData {
