@@ -1,3 +1,4 @@
+import { MakerNote, ParsedMakerNote } from './makerNote';
 import { Compression } from './parsers/parseCompression';
 import { Flash } from './parsers/parseFlash';
 import { MeteringMode } from './parsers/parseMeteringMode';
@@ -30,6 +31,7 @@ export interface ExifData {
   exif?: ExifExifData;
   gps?: ExifGPSData;
   interop?: ExifInteropData;
+  makerNote?: MakerNote;
 }
 
 export interface ParsedExifData {
@@ -38,6 +40,7 @@ export interface ParsedExifData {
   exif?: ParsedExifExifData;
   gps?: ParsedExifGPSData;
   interop?: ParsedExifInteropData;
+  makerNote?: ParsedMakerNote;
 }
 
 export interface ExifImageData {
@@ -77,6 +80,7 @@ export interface ExifExifData {
   MeteringMode?: UInt;
   Flash?: UInt;
   FocalLength?: UFloat;
+  MakerNote?: Buffer;
 }
 
 export interface ExifGPSData {
@@ -124,6 +128,7 @@ export interface ParsedExifExifData {
   MeteringMode?: ExifValue<UInt, MeteringMode>;
   Flash?: ExifValue<UInt, Flash>;
   FocalLength?: ExifValue<UFloat, string>;
+  MakerNote?: ExifValue<Buffer, Buffer>;
 }
 
 export interface ParsedExifGPSData {

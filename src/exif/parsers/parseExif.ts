@@ -28,6 +28,7 @@ import { parseFNumber } from './parseFNumber';
 import { parseFocalLength } from './parseFocalLength';
 import { parseGPS } from './parseGPS';
 import { parseMake } from './parseMake';
+import { parseMakerNote } from './parseMakerNote';
 import { parseMaxApertureValue } from './parseMaxApertureValue';
 import { parseMeteringMode } from './parseMeteringMode';
 import { parseModel } from './parseModel';
@@ -53,6 +54,7 @@ export function parseExif(
   if (exif.exif) result.exif = parseTags(exif.exif, options);
   if (exif.gps) result.gps = parseGPS(exif.gps, options);
   if (exif.interop) result.interop = parseTags(exif.interop, options);
+  if (exif.makerNote) result.makerNote = exif.makerNote;
 
   return result;
 }
@@ -154,6 +156,11 @@ export function parseTags(
         case 'Make':
           const Make = parseMake(value, options);
           if (Make !== null) exif.Make = Make;
+          break;
+
+        case 'MakerNote':
+          const MakerNote = parseMakerNote(value, options);
+          if (MakerNote !== null) exif.MakerNote = MakerNote;
           break;
 
         case 'MaxApertureValue':

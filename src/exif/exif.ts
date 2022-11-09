@@ -1,6 +1,7 @@
 import { isBuffer, isUInt } from '../lib/assert';
 import { readUInt16, readUInt32 } from '../lib/buffer';
 import { isExifBuffer, parseTiffHeader, readTags } from './lib/exifHelpers';
+import { parseMakerNote } from './makerNote';
 import { parseExif } from './parsers';
 import { EXIF_TAGS } from './tags';
 import {
@@ -35,6 +36,8 @@ export function exif(
   buffer: Buffer,
   options: Partial<ExifOptions>
 ): ExifData | ParsedExifData {
+  const OPTIONS: ExifOptions = { ...DEFAULT_OPTIONS, ...options };
+
   if (!isBuffer(buffer))
     throw new TypeError(`Exif: buffer is not of type Buffer!`);
 
@@ -83,5 +86,9 @@ export function exif(
     if (exif !== null) result.exif = exif;
   }
 
-  return parseExif(result, { ...DEFAULT_OPTIONS, ...options });
+  if (OPTIONS.parseMakerNote && result.exif?.MakerNote) {
+    result.makerNote = parseMakerNote(result.exif.MakerNote, OPTIONS, result);
+  }
+
+  return parseExif(result, OPTIONS);
 }
