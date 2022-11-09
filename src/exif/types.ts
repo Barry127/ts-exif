@@ -1,4 +1,5 @@
 import { Compression } from './parsers/parseCompression';
+import { MeteringMode } from './parsers/parseMeteringMode';
 import { Orientation } from './parsers/parseOrientation';
 import { ResolutionUnit } from './parsers/ParseResolutionUnit';
 import { YCbCrPositioning } from './parsers/parseYCbCrPositioning';
@@ -72,6 +73,7 @@ export interface ExifExifData {
   ExposureBias?: Float;
   MaxApertureValue?: UFloat;
   SubjectDistance?: UFloat;
+  MeteringMode?: UInt;
 }
 
 export interface ExifGPSData {
@@ -116,6 +118,7 @@ export interface ParsedExifExifData {
   ExposureBias?: ExifValue<Float, string>;
   MaxApertureValue?: ExifValue<UFloat, string>;
   SubjectDistance?: ExifValue<UFloat, string>;
+  MeteringMode?: ExifValue<UInt, MeteringMode>;
 }
 
 export interface ParsedExifGPSData {

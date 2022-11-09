@@ -27,6 +27,7 @@ import { parseFNumber } from './parseFNumber';
 import { parseGPS } from './parseGPS';
 import { parseMake } from './parseMake';
 import { parseMaxApertureValue } from './parseMaxApertureValue';
+import { parseMeteringMode } from './parseMeteringMode';
 import { parseModel } from './parseModel';
 import { parseOrientation } from './parseOrientation';
 import { parseResolutionUnit } from './ParseResolutionUnit';
@@ -147,6 +148,11 @@ export function parseTags(
           const MaxApertureValue = parseMaxApertureValue(value, options);
           if (MaxApertureValue !== null)
             exif.MaxApertureValue = MaxApertureValue;
+          break;
+
+        case 'MeteringMode':
+          const MeteringMode = parseMeteringMode(value, options);
+          if (MeteringMode !== null) exif.MeteringMode = MeteringMode;
           break;
 
         case 'Model':
