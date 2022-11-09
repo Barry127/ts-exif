@@ -76,6 +76,7 @@ export interface ExifExifData {
   SubjectDistance?: UFloat;
   MeteringMode?: UInt;
   Flash?: UInt;
+  FocalLength?: UFloat;
 }
 
 export interface ExifGPSData {
@@ -122,6 +123,7 @@ export interface ParsedExifExifData {
   SubjectDistance?: ExifValue<UFloat, string>;
   MeteringMode?: ExifValue<UInt, MeteringMode>;
   Flash?: ExifValue<UInt, Flash>;
+  FocalLength?: ExifValue<UFloat, string>;
 }
 
 export interface ParsedExifGPSData {
