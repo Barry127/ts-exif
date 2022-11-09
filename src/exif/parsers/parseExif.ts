@@ -24,6 +24,7 @@ import { parseExifVersion } from './parseExifVersion';
 import { parseExposureBias } from './parseExposureBias';
 import { parseExposureTime } from './parseExposureTime';
 import { parseFlash } from './parseFlash';
+import { parseFlashpixVersion } from './parseFlashpixVersion';
 import { parseFNumber } from './parseFNumber';
 import { parseFocalLength } from './parseFocalLength';
 import { parseGPS } from './parseGPS';
@@ -147,6 +148,11 @@ export function parseTags(
         case 'Flash':
           const Flash = parseFlash(value, options);
           if (Flash !== null) exif.Flash = Flash;
+          break;
+
+        case 'FlashpixVersion':
+          const FlashpixVersion = parseFlashpixVersion(value, options);
+          if (FlashpixVersion !== null) exif.FlashpixVersion = FlashpixVersion;
           break;
 
         case 'FocalLength':

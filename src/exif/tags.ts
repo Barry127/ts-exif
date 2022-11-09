@@ -40,5 +40,6 @@ export const EXIF_TAGS: Record<
   0x9209: 'Flash',
   0x920a: 'FocalLength',
   0x927c: 'MakerNote',
-  0x9286: 'UserComment'
+  0x9286: 'UserComment',
+  0xa000: 'FlashpixVersion'
 };
