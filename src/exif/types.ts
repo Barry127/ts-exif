@@ -85,6 +85,8 @@ export interface ExifExifData {
   UserComment?: Buffer;
   FlashpixVersion?: Buffer;
   ColorSpace?: UInt;
+  PixelXDimension?: UInt;
+  PixelYDimension?: UInt;
 }
 
 export interface ExifGPSData {
@@ -136,6 +138,8 @@ export interface ParsedExifExifData {
   UserComment?: ExifValue<Buffer, string>;
   FlashpixVersion?: ExifValue<Buffer, string>;
   ColorSpace?: ExifValue<UInt, ColorSpace>;
+  PixelXDimension?: ExifValue<UInt, UInt>;
+  PixelYDimension?: ExifValue<UInt, UInt>;
 }
 
 export interface ParsedExifGPSData {

@@ -35,6 +35,8 @@ import { parseMaxApertureValue } from './parseMaxApertureValue';
 import { parseMeteringMode } from './parseMeteringMode';
 import { parseModel } from './parseModel';
 import { parseOrientation } from './parseOrientation';
+import { parsePixelXDimension } from './parsePixelXDimension';
+import { parsePixelYDimension } from './parsePixelYDimension';
 import { parseResolutionUnit } from './ParseResolutionUnit';
 import { parseShutterSpeedValue } from './parseShutterSpeedValue';
 import { parseSubjectDistance } from './parseSubjectDistance';
@@ -195,6 +197,16 @@ export function parseTags(
         case 'Orientation':
           const Orientation = parseOrientation(value, options);
           if (Orientation !== null) exif.Orientation = Orientation;
+          break;
+
+        case 'PixelXDimension':
+          const PixelXDimension = parsePixelXDimension(value, options);
+          if (PixelXDimension !== null) exif.PixelXDimension = PixelXDimension;
+          break;
+
+        case 'PixelYDimension':
+          const PixelYDimension = parsePixelYDimension(value, options);
+          if (PixelYDimension !== null) exif.PixelYDimension = PixelYDimension;
           break;
 
         case 'ResolutionUnit':

@@ -42,5 +42,7 @@ export const EXIF_TAGS: Record<
   0x927c: 'MakerNote',
   0x9286: 'UserComment',
   0xa000: 'FlashpixVersion',
-  0xa001: 'ColorSpace'
+  0xa001: 'ColorSpace',
+  0xa002: 'PixelXDimension',
+  0xa003: 'PixelYDimension'
 };
