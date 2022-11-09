@@ -44,6 +44,8 @@ import { parseModel } from './parseModel';
 import { parseOrientation } from './parseOrientation';
 import { parsePixelXDimension } from './parsePixelXDimension';
 import { parsePixelYDimension } from './parsePixelYDimension';
+import { parseRelatedImageHeight } from './parseRelatedImageHeight';
+import { parseRelatedImageWidth } from './parseRelatedImageWidth';
 import { parseResolutionUnit } from './ParseResolutionUnit';
 import { parseSensingMethod } from './parseSensingMethod';
 import { parseShutterSpeedValue } from './parseShutterSpeedValue';
@@ -264,6 +266,18 @@ export function parseTags(
         case 'PixelYDimension':
           const PixelYDimension = parsePixelYDimension(value, options);
           if (PixelYDimension !== null) exif.PixelYDimension = PixelYDimension;
+          break;
+
+        case 'RelatedImageHeight':
+          const RelatedImageHeight = parseRelatedImageHeight(value, options);
+          if (RelatedImageHeight !== null)
+            exif.RelatedImageHeight = RelatedImageHeight;
+          break;
+
+        case 'RelatedImageWidth':
+          const RelatedImageWidth = parseRelatedImageWidth(value, options);
+          if (RelatedImageWidth !== null)
+            exif.RelatedImageWidth = RelatedImageWidth;
           break;
 
         case 'ResolutionUnit':
