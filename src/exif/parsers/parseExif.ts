@@ -42,6 +42,7 @@ import { parseOrientation } from './parseOrientation';
 import { parsePixelXDimension } from './parsePixelXDimension';
 import { parsePixelYDimension } from './parsePixelYDimension';
 import { parseResolutionUnit } from './ParseResolutionUnit';
+import { parseSensingMethod } from './parseSensingMethod';
 import { parseShutterSpeedValue } from './parseShutterSpeedValue';
 import { parseSubjectDistance } from './parseSubjectDistance';
 import { parseThumbnailLength } from './parseThumbnailLength';
@@ -250,6 +251,11 @@ export function parseTags(
         case 'ResolutionUnit':
           const ResolutionUnit = parseResolutionUnit(value, options);
           if (ResolutionUnit !== null) exif.ResolutionUnit = ResolutionUnit;
+          break;
+
+        case 'SensingMethod':
+          const SensingMethod = parseSensingMethod(value, options);
+          if (SensingMethod !== null) exif.SensingMethod = SensingMethod;
           break;
 
         case 'ShutterSpeedValue':

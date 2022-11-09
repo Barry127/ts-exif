@@ -6,6 +6,7 @@ import { FocalPlaneResolutionUnit } from './parsers/parseFocalPlaneResolutionUni
 import { MeteringMode } from './parsers/parseMeteringMode';
 import { Orientation } from './parsers/parseOrientation';
 import { ResolutionUnit } from './parsers/ParseResolutionUnit';
+import { SensingMethod } from './parsers/parseSensingMethod';
 import { YCbCrPositioning } from './parsers/parseYCbCrPositioning';
 
 export interface ExifOptions {
@@ -92,6 +93,7 @@ export interface ExifExifData {
   FocalPlaneXResolution?: UFloat;
   FocalPlaneYResolution?: UFloat;
   FocalPlaneResolutionUnit?: UInt;
+  SensingMethod?: UInt;
 }
 
 export interface ExifGPSData {
@@ -149,6 +151,7 @@ export interface ParsedExifExifData {
   FocalPlaneXResolution?: ExifValue<UFloat, string>;
   FocalPlaneYResolution?: ExifValue<UFloat, string>;
   FocalPlaneResolutionUnit?: ExifValue<UInt, FocalPlaneResolutionUnit>;
+  SensingMethod?: ExifValue<UInt, SensingMethod>;
 }
 
 export interface ParsedExifGPSData {

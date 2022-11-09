@@ -48,5 +48,6 @@ export const EXIF_TAGS: Record<
   0xa005: 'InteropOffset',
   0xa20e: 'FocalPlaneXResolution',
   0xa20f: 'FocalPlaneYResolution',
-  0xa210: 'FocalPlaneResolutionUnit'
+  0xa210: 'FocalPlaneResolutionUnit',
+  0xa217: 'SensingMethod'
 };
