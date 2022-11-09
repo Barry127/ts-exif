@@ -13,6 +13,7 @@ import {
   ParsedExifThumbnailData
 } from '../types';
 import { parseApertureValue } from './parseApertureValue';
+import { parseColorSpace } from './parseColorSpace';
 import { parseComponentsConfiguration } from './parseComponentsConfiguration';
 import { parseCompressedBitsPerPixel } from './parseCompressedBitsPerPixel';
 import { parseCompression } from './parseCompression';
@@ -78,6 +79,11 @@ export function parseTags(
         case 'ApertureValue':
           const ApertureValue = parseApertureValue(value, options);
           if (ApertureValue !== null) exif.ApertureValue = ApertureValue;
+          break;
+
+        case 'ColorSpace':
+          const ColorSpace = parseColorSpace(value, options);
+          if (ColorSpace !== null) exif.ColorSpace = ColorSpace;
           break;
 
         case 'ComponentsConfiguration':

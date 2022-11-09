@@ -1,4 +1,5 @@
 import { MakerNote, ParsedMakerNote } from './makerNote';
+import { ColorSpace } from './parsers/parseColorSpace';
 import { Compression } from './parsers/parseCompression';
 import { Flash } from './parsers/parseFlash';
 import { MeteringMode } from './parsers/parseMeteringMode';
@@ -83,6 +84,7 @@ export interface ExifExifData {
   MakerNote?: Buffer;
   UserComment?: Buffer;
   FlashpixVersion?: Buffer;
+  ColorSpace?: UInt;
 }
 
 export interface ExifGPSData {
@@ -133,6 +135,7 @@ export interface ParsedExifExifData {
   MakerNote?: ExifValue<Buffer, Buffer>;
   UserComment?: ExifValue<Buffer, string>;
   FlashpixVersion?: ExifValue<Buffer, string>;
+  ColorSpace?: ExifValue<UInt, ColorSpace>;
 }
 
 export interface ParsedExifGPSData {
