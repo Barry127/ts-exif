@@ -28,6 +28,7 @@ import { parseFlash } from './parseFlash';
 import { parseFlashpixVersion } from './parseFlashpixVersion';
 import { parseFNumber } from './parseFNumber';
 import { parseFocalLength } from './parseFocalLength';
+import { parseFocalPlaneResolutionUnit } from './parseFocalPlaneResolutionUnit';
 import { parseFocalPlaneXResolution } from './parseFocalPlaneXResolution';
 import { parseFocalPlaneYResolution } from './parseFocalPlaneYResolution';
 import { parseGPS } from './parseGPS';
@@ -171,10 +172,20 @@ export function parseTags(
           if (FocalLength !== null) exif.FocalLength = FocalLength;
           break;
 
+        case 'FocalPlaneResolutionUnit':
+          const FocalPlaneResolutionUnit = parseFocalPlaneResolutionUnit(
+            value,
+            options
+          );
+          if (FocalPlaneResolutionUnit !== null)
+            exif.FocalPlaneResolutionUnit = FocalPlaneResolutionUnit;
+          break;
+
         case 'FocalPlaneXResolution':
           const FocalPlaneXResolution = parseFocalPlaneXResolution(
             value,
-            options
+            options,
+            rawExif
           );
           if (FocalPlaneXResolution !== null)
             exif.FocalPlaneXResolution = FocalPlaneXResolution;
@@ -183,7 +194,8 @@ export function parseTags(
         case 'FocalPlaneYResolution':
           const FocalPlaneYResolution = parseFocalPlaneYResolution(
             value,
-            options
+            options,
+            rawExif
           );
           if (FocalPlaneYResolution !== null)
             exif.FocalPlaneYResolution = FocalPlaneYResolution;

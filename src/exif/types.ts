@@ -2,6 +2,7 @@ import { MakerNote, ParsedMakerNote } from './makerNote';
 import { ColorSpace } from './parsers/parseColorSpace';
 import { Compression } from './parsers/parseCompression';
 import { Flash } from './parsers/parseFlash';
+import { FocalPlaneResolutionUnit } from './parsers/parseFocalPlaneResolutionUnit';
 import { MeteringMode } from './parsers/parseMeteringMode';
 import { Orientation } from './parsers/parseOrientation';
 import { ResolutionUnit } from './parsers/ParseResolutionUnit';
@@ -90,6 +91,7 @@ export interface ExifExifData {
   InteropOffset?: UInt;
   FocalPlaneXResolution?: UFloat;
   FocalPlaneYResolution?: UFloat;
+  FocalPlaneResolutionUnit?: UInt;
 }
 
 export interface ExifGPSData {
@@ -144,8 +146,9 @@ export interface ParsedExifExifData {
   PixelXDimension?: ExifValue<UInt, UInt>;
   PixelYDimension?: ExifValue<UInt, UInt>;
   InteropOffset?: ExifValue<UInt, UInt>;
-  FocalPlaneXResolution?: ExifValue<UFloat, UFloat>;
-  FocalPlaneYResolution?: ExifValue<UFloat, UFloat>;
+  FocalPlaneXResolution?: ExifValue<UFloat, string>;
+  FocalPlaneYResolution?: ExifValue<UFloat, string>;
+  FocalPlaneResolutionUnit?: ExifValue<UInt, FocalPlaneResolutionUnit>;
 }
 
 export interface ParsedExifGPSData {

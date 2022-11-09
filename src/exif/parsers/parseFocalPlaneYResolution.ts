@@ -1,13 +1,31 @@
+import { isIntBetween } from '../../../_src/helpers/assert';
 import { isUFloat } from '../../lib/assert';
-import { packageValue } from '../lib/parseHelpers';
-import { ExifOptions, ExifValue, UFloat } from '../types';
+import {
+  ExifExifData,
+  ExifImageData,
+  ExifInteropData,
+  ExifOptions,
+  ExifThumbnailData,
+  ExifValue,
+  UFloat
+} from '../types';
+import { FOCAL_PLANE_RESOLUTION_UNIT_MAP } from './parseFocalPlaneResolutionUnit';
 
 export function parseFocalPlaneYResolution(
   value: UFloat,
-  options: ExifOptions
-): ExifValue<UFloat, UFloat> | UFloat | null {
+  options: ExifOptions,
+  exif: ExifImageData & ExifThumbnailData & ExifExifData & ExifInteropData
+): ExifValue<UFloat, string> | UFloat | null {
   if (!isUFloat(value)) return null;
   if (!options.parseValues) return value;
 
-  return packageValue(value);
+  if (isIntBetween(exif.FocalPlaneResolutionUnit, 2, 5))
+    return {
+      original: value,
+      value: `${value.toFixed(2)} ${
+        FOCAL_PLANE_RESOLUTION_UNIT_MAP[exif.FocalPlaneResolutionUnit]
+      }`
+    };
+
+  return { original: value, value: `${value.toFixed(2)}` };
 }
