@@ -29,6 +29,7 @@ import { parseFlashpixVersion } from './parseFlashpixVersion';
 import { parseFNumber } from './parseFNumber';
 import { parseFocalLength } from './parseFocalLength';
 import { parseGPS } from './parseGPS';
+import { parseInteropOffset } from './parseInteropOffset';
 import { parseMake } from './parseMake';
 import { parseMakerNote } from './parseMakerNote';
 import { parseMaxApertureValue } from './parseMaxApertureValue';
@@ -166,6 +167,11 @@ export function parseTags(
         case 'FocalLength':
           const FocalLength = parseFocalLength(value, options);
           if (FocalLength !== null) exif.FocalLength = FocalLength;
+          break;
+
+        case 'InteropOffset':
+          const InteropOffset = parseInteropOffset(value, options);
+          if (InteropOffset !== null) exif.InteropOffset = InteropOffset;
           break;
 
         case 'Make':

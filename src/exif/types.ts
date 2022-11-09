@@ -87,6 +87,7 @@ export interface ExifExifData {
   ColorSpace?: UInt;
   PixelXDimension?: UInt;
   PixelYDimension?: UInt;
+  InteropOffset?: UInt;
 }
 
 export interface ExifGPSData {
@@ -140,6 +141,7 @@ export interface ParsedExifExifData {
   ColorSpace?: ExifValue<UInt, ColorSpace>;
   PixelXDimension?: ExifValue<UInt, UInt>;
   PixelYDimension?: ExifValue<UInt, UInt>;
+  InteropOffset?: ExifValue<UInt, UInt>;
 }
 
 export interface ParsedExifGPSData {

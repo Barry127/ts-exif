@@ -8,6 +8,7 @@ import {
   ExifData,
   ExifExifData,
   ExifImageData,
+  ExifInteropData,
   ExifOptions,
   ExifThumbnailData,
   ParsedExifData
@@ -84,6 +85,16 @@ export function exif(
       EXIF_TAGS
     );
     if (exif !== null) result.exif = exif;
+  }
+
+  if (isUInt(result.exif?.InteropOffset)) {
+    const interop = readTags<ExifInteropData>(
+      buffer,
+      result.exif!.InteropOffset + 6,
+      endian,
+      EXIF_TAGS
+    );
+    if (interop !== null) result.interop = interop;
   }
 
   if (OPTIONS.parseMakerNote && result.exif?.MakerNote) {
