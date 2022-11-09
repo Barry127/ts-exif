@@ -28,6 +28,8 @@ import { parseFlash } from './parseFlash';
 import { parseFlashpixVersion } from './parseFlashpixVersion';
 import { parseFNumber } from './parseFNumber';
 import { parseFocalLength } from './parseFocalLength';
+import { parseFocalPlaneXResolution } from './parseFocalPlaneXResolution';
+import { parseFocalPlaneYResolution } from './parseFocalPlaneYResolution';
 import { parseGPS } from './parseGPS';
 import { parseInteropOffset } from './parseInteropOffset';
 import { parseMake } from './parseMake';
@@ -167,6 +169,24 @@ export function parseTags(
         case 'FocalLength':
           const FocalLength = parseFocalLength(value, options);
           if (FocalLength !== null) exif.FocalLength = FocalLength;
+          break;
+
+        case 'FocalPlaneXResolution':
+          const FocalPlaneXResolution = parseFocalPlaneXResolution(
+            value,
+            options
+          );
+          if (FocalPlaneXResolution !== null)
+            exif.FocalPlaneXResolution = FocalPlaneXResolution;
+          break;
+
+        case 'FocalPlaneYResolution':
+          const FocalPlaneYResolution = parseFocalPlaneYResolution(
+            value,
+            options
+          );
+          if (FocalPlaneYResolution !== null)
+            exif.FocalPlaneYResolution = FocalPlaneYResolution;
           break;
 
         case 'InteropOffset':

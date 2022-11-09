@@ -88,6 +88,8 @@ export interface ExifExifData {
   PixelXDimension?: UInt;
   PixelYDimension?: UInt;
   InteropOffset?: UInt;
+  FocalPlaneXResolution?: UFloat;
+  FocalPlaneYResolution?: UFloat;
 }
 
 export interface ExifGPSData {
@@ -142,6 +144,8 @@ export interface ParsedExifExifData {
   PixelXDimension?: ExifValue<UInt, UInt>;
   PixelYDimension?: ExifValue<UInt, UInt>;
   InteropOffset?: ExifValue<UInt, UInt>;
+  FocalPlaneXResolution?: ExifValue<UFloat, UFloat>;
+  FocalPlaneYResolution?: ExifValue<UFloat, UFloat>;
 }
 
 export interface ParsedExifGPSData {
