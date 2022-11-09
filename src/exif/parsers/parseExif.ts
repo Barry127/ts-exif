@@ -31,6 +31,7 @@ import { parseModel } from './parseModel';
 import { parseOrientation } from './parseOrientation';
 import { parseResolutionUnit } from './ParseResolutionUnit';
 import { parseShutterSpeedValue } from './parseShutterSpeedValue';
+import { parseSubjectDistance } from './parseSubjectDistance';
 import { parseThumbnailLength } from './parseThumbnailLength';
 import { parseThumbnailOffset } from './parseThumbnailOffset';
 import { parseXResolution } from './parseXResolution';
@@ -167,6 +168,11 @@ export function parseTags(
           const ShutterSpeedValue = parseShutterSpeedValue(value, options);
           if (ShutterSpeedValue !== null)
             exif.ShutterSpeedValue = ShutterSpeedValue;
+          break;
+
+        case 'SubjectDistance':
+          const SubjectDistance = parseSubjectDistance(value, options);
+          if (SubjectDistance !== null) exif.SubjectDistance = SubjectDistance;
           break;
 
         case 'ThumbnailLength':

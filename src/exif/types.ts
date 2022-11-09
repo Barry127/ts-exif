@@ -71,6 +71,7 @@ export interface ExifExifData {
   ApertureValue?: UFloat;
   ExposureBias?: Float;
   MaxApertureValue?: UFloat;
+  SubjectDistance?: UFloat;
 }
 
 export interface ExifGPSData {
@@ -114,6 +115,7 @@ export interface ParsedExifExifData {
   ApertureValue?: ExifValue<UFloat, string>;
   ExposureBias?: ExifValue<Float, string>;
   MaxApertureValue?: ExifValue<UFloat, string>;
+  SubjectDistance?: ExifValue<UFloat, string>;
 }
 
 export interface ParsedExifGPSData {
