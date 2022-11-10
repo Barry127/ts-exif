@@ -56,7 +56,7 @@ export function exif(
   const ifd0 = readTags<ExifImageData>(buffer, offset, endian, EXIF_TAGS);
   if (ifd0 === null) throw Error('Exif: No exif tags found');
 
-  let result: ExifData = {
+  const result: ExifData = {
     image: ifd0
   };
 
@@ -98,7 +98,13 @@ export function exif(
   }
 
   if (OPTIONS.parseMakerNote && result.exif?.MakerNote) {
-    result.makerNote = parseMakerNote(result.exif.MakerNote, OPTIONS, result);
+    const makerNote = parseMakerNote(
+      result.exif.MakerNote,
+      buffer,
+      result,
+      OPTIONS
+    );
+    if (makerNote !== null) result.makerNote = makerNote as any;
   }
 
   return parseExif(result, OPTIONS);

@@ -1,5 +1,9 @@
 import { Float, Int, UFloat, UInt } from '../exif/types';
 
+export function isArray(value: unknown): value is Array<any> {
+  return Array.isArray(value);
+}
+
 export function isBuffer(value: unknown): value is Buffer {
   return Buffer.isBuffer(value);
 }

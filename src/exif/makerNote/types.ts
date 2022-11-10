@@ -1,3 +1,5 @@
-export type MakerNote = {};
+import { CanonMakerNote, ParsedCanonMakerNote } from './canon';
 
-export type ParsedMakerNote = {};
+export type MakerNote = CanonMakerNote;
+
+export type ParsedMakerNote = ParsedCanonMakerNote;
