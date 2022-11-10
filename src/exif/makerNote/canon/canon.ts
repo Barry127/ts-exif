@@ -17,5 +17,5 @@ export function parseCanonMakerNote(
 
   if (result === null) return null;
 
-  return parseCanon(result, options);
+  return parseCanon(result, exif, options);
 }

@@ -1,9 +1,11 @@
-import { ExifOptions } from '../../../types';
+import { ExifData, ExifOptions } from '../../../types';
 import { CanonMakerNote, ParsedCanonMakerNote } from '../types';
 import { parseCanonCameraSettings } from './parseCanonCameraSettings';
+import { parseCanonFocalLength } from './parseCanonFocalLength';
 
 export function parseCanon(
   rawTags: CanonMakerNote,
+  exif: ExifData,
   options: ExifOptions
 ): CanonMakerNote | ParsedCanonMakerNote {
   return Object.entries(rawTags).reduce<Record<string, any>>(
@@ -13,6 +15,17 @@ export function parseCanon(
           const CanonCameraSettings = parseCanonCameraSettings(value, options);
           if (CanonCameraSettings !== null)
             tags.CanonCameraSettings = CanonCameraSettings;
+          break;
+
+        case 'CanonFocalLength':
+          const CanonFocalLength = parseCanonFocalLength(
+            value,
+            exif,
+            rawTags,
+            options
+          );
+          if (CanonFocalLength !== null)
+            tags.CanonFocalLength = CanonFocalLength;
           break;
 
         default:
