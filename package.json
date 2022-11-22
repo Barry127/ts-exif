@@ -36,6 +36,6 @@
   },
   "homepage": "https://github.com/Barry127/ts-exif#readme",
   "dependencies": {
-    "@types/node": "^18.11.8"
+    "@types/node": "^18.11.9"
   }
 }
